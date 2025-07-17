@@ -26,9 +26,13 @@
 .formInput {
     height: 1.5rem;
     background-color: #d9d9d9;
-    color: #808080;
+    color: black;
     border: none;
     padding: 1rem;
+}
+
+.formInput::placeholder {
+    color: #808080
 }
 
 .buttonContainer {

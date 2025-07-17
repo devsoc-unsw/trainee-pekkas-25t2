@@ -17,28 +17,22 @@ function LoginCard() {
     <div className={styles.card}>
       <h1 className={styles.title}>LOG IN</h1>
       <form onSubmit={(e) => onSubmitHandler(e)} className={styles.form}>
-        <label htmlFor="username" className={styles.inputContainer}>
-          Username:
-          <input 
+        <input 
             type="text"
             className={styles.formInput}
             id="username"
             name="username"
-            placeholder='Enter username here'
+            placeholder='Username'
             onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label htmlFor="password" className={styles.inputContainer}>
-          Password:
-          <input
+        />
+        <input
             type="password"
             className={styles.formInput}
             id="password"
             name="password"
-            placeholder='Enter password here'
+            placeholder='Password'
             onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+        />
         <div className={styles.buttonContainer}>
           <button type="submit" className={styles.loginButton}>Log In</button>
         </div>
