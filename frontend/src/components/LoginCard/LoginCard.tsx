@@ -5,14 +5,18 @@ function LoginCard() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const onSubmitHandler = () => {
-
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // temp stuff... make req to backend auth here
+    console.log("Logging in...")
+    console.log(`username is: ${username}`)
+    console.log(`password is: ${password}`)
   }
 
   return (
     <div className={styles.card}>
       <h1 className={styles.title}>LOG IN</h1>
-      <form onSubmit={onSubmitHandler} className={styles.form}>
+      <form onSubmit={(e) => onSubmitHandler(e)} className={styles.form}>
         <label htmlFor="username" className={styles.inputContainer}>
           Username:
           <input 
@@ -21,6 +25,7 @@ function LoginCard() {
             id="username"
             name="username"
             placeholder='Enter username here'
+            onChange={(e) => setUsername(e.target.value)}
           />
         </label>
         <label htmlFor="password" className={styles.inputContainer}>
@@ -31,10 +36,11 @@ function LoginCard() {
             id="password"
             name="password"
             placeholder='Enter password here'
+            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <div className={styles.buttonContainer}>
-          <button className={styles.loginButton}>Log In</button>
+          <button type="submit" className={styles.loginButton}>Log In</button>
         </div>
       </form>
       <p className={styles.bottomText}>Don't have an account? <a href="">Register Here</a></p>
