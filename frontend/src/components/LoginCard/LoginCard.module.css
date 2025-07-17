@@ -1,5 +1,5 @@
 .title {
-    color: black;
+    color: 000000;
     margin-top: 2rem;
     margin-bottom: 1.75rem;
 }
@@ -7,7 +7,7 @@
 .card {
     border-radius: 0.5rem;
     width: 25rem;
-    background-color: white;
+    background-color: #ffffff;
     padding:3rem;
     padding-top: 0.5rem;
 }
@@ -26,7 +26,7 @@
 .formInput {
     height: 1.5rem;
     background-color: #d9d9d9;
-    color: black;
+    color: #000000;
     border: none;
     padding: 1rem;
 }
@@ -43,7 +43,7 @@
 .loginButton {
     margin-top: 1.5rem;
     background-color: #66b1b6;
-    color: white;
+    color: #ffffff;
     border: none;
     height:3rem;
     font-size: 1.25rem;
