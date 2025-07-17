@@ -43,7 +43,7 @@ function LoginCard() {
           <button type="submit" className={styles.loginButton}>Log In</button>
         </div>
       </form>
-      <p className={styles.bottomText}>Don't have an account? <a href="">Register Here</a></p>
+      <p className={styles.bottomText}>Don't have an account? <a href="#">Register Here</a></p>
     </div>
   )
 }
