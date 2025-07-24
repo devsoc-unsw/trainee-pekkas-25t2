@@ -4,3 +4,7 @@
     gap: 1rem;
     margin-bottom: 1rem;
 }
+
+.errorMessage {
+    color: #E11D62;
+}

@@ -15,20 +15,19 @@ function LoginCard() {
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // temp stuff... make req to backend auth here
-    console.log("Logging in...")
-    console.log(`username is: ${username}`)
-    console.log(`password is: ${password}`)
-
     // error handling
     if (!username) {
       setIsError(true)
-      console.log("error username")
       setErrorMessage("Username cannot be empty")
     } else if (!password) {
       setIsError(true)
       setErrorMessage("Password cannot be empty")
     }
+
+    // temp stuff... make req to backend auth here
+    console.log("Logging in...")
+    console.log(`username is: ${username}`)
+    console.log(`password is: ${password}`)
   }
 
     const onClickHandler = (e: React.MouseEvent) => {
@@ -54,10 +53,10 @@ function LoginCard() {
           onChange={(e) => setPassword(e.target.value)}
           placeHolder="Password"
         />
-        {isError && (<div className={`${styles.errorMessage} center-row`}>{errorMessage}</div>)}
         <div className="center-row">
           <PrimaryButton type="submit">Log In</PrimaryButton>
         </div>
+        {isError && (<div className={`${styles.errorMessage} center-row`}>{errorMessage}</div>)}
       </form>
       <div className="center-row">
         <p>Don't have an account? <a href="" onClick={(e) => onClickHandler(e)}>Register Here</a></p>
