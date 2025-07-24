@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import styles from './LoginCard.module.css'
+import FormInput from '../FormInput/FormInput';
+import Card from '../Card/Card';
+import PrimaryButton from '../PrimaryButton/PrimaryButton';
 
 function LoginCard() {
   const [username, setUsername] = useState<string>('');
@@ -14,31 +17,27 @@ function LoginCard() {
   }
 
   return (
-    <div className={styles.card}>
+    <Card>
       <h1 className={styles.title}>LOG IN</h1>
       <form onSubmit={(e) => onSubmitHandler(e)} className={styles.form}>
-        <input 
-          type="text"
-          className={styles.formInput}
-          id="username"
-          name="username"
-          placeholder='Username'
+        <FormInput 
+          type="text" 
           onChange={(e) => setUsername(e.target.value)}
+          placeHolder="Username"
         />
-        <input
-          type="password"
-          className={styles.formInput}
-          id="password"
-          name="password"
-          placeholder='Password'
+        <FormInput 
+          type="password" 
           onChange={(e) => setPassword(e.target.value)}
+          placeHolder="Password"
         />
-        <div className={styles.buttonContainer}>
-          <button type="submit" className={styles.loginButton}>Log In</button>
+        <div className="center-row">
+          <PrimaryButton>Log In</PrimaryButton>
         </div>
       </form>
-      <p className={styles.bottomText}>Don't have an account? <a href="#">Register Here</a></p>
-    </div>
+      <div className="center-row">
+        <p>Don't have an account? <a href="#">Register Here</a></p>
+      </div>
+    </Card>
   )
 }
 
