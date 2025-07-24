@@ -8,8 +8,10 @@ import { useNavigate } from 'react-router';
 function LoginCard() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [username, setUsername] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,6 +19,16 @@ function LoginCard() {
     console.log("Logging in...")
     console.log(`username is: ${username}`)
     console.log(`password is: ${password}`)
+
+    // error handling
+    if (!username) {
+      setIsError(true)
+      console.log("error username")
+      setErrorMessage("Username cannot be empty")
+    } else if (!password) {
+      setIsError(true)
+      setErrorMessage("Password cannot be empty")
+    }
   }
 
     const onClickHandler = (e: React.MouseEvent) => {
@@ -27,7 +39,11 @@ function LoginCard() {
   return (
     <Card>
       <h1 className={styles.title}>LOG IN</h1>
-      <form onSubmit={(e) => onSubmitHandler(e)} className={styles.form}>
+      <form 
+        onSubmit={(e) => onSubmitHandler(e)}
+        className={styles.form}
+        onChange={() => setIsError(false)}
+      >
         <FormInput 
           type="text" 
           onChange={(e) => setUsername(e.target.value)}
@@ -38,8 +54,9 @@ function LoginCard() {
           onChange={(e) => setPassword(e.target.value)}
           placeHolder="Password"
         />
+        {isError && (<div className={`${styles.errorMessage} center-row`}>{errorMessage}</div>)}
         <div className="center-row">
-          <PrimaryButton>Log In</PrimaryButton>
+          <PrimaryButton type="submit">Log In</PrimaryButton>
         </div>
       </form>
       <div className="center-row">
