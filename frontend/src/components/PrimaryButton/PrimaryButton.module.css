@@ -1,0 +1,10 @@
+.primaryButton {
+    margin-top: 1.5rem;
+    background-color: #66b1b6;
+    color: #ffffff;
+    border: none;
+    height:3rem;
+    font-size: 1.25rem;
+    width: 80%;
+    cursor: pointer;
+}
