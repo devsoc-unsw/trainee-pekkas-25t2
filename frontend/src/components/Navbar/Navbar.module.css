@@ -1,0 +1,58 @@
+.navbar {
+  width: 70vw;
+  height: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 72vh;
+
+  background-color: #EEEEEE;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  border-radius: 36px;
+  box-shadow: 0 4px 8px gray;
+}
+
+.itemUnclicked {
+  width: 30px;
+  height: 30px;
+  transform: scale(1);
+  cursor: pointer;
+  padding: 1rem;
+
+  transition:transform 0.2s ease;
+}
+
+.itemUnclicked:hover {
+  transform: scale(1.3);
+}
+
+.itemClicked {
+  width: 30px;
+  height: 30px;
+  transform: scale(1);
+  cursor: pointer;
+  padding: 1rem;
+
+  transition:transform 0.2s ease;
+
+  filter: brightness(0) invert(1);
+}
+
+.itemWrapperUnclicked {
+  width: 4rem;
+  height: 4rem;
+
+  border-radius: 100px;
+
+  cursor: pointer;
+}
+
+.itemWrapperClicked {
+  width: 4rem;
+  height: 4rem;
+
+  border-radius: 100px;
+  background-color: #65B1B5;
+}
