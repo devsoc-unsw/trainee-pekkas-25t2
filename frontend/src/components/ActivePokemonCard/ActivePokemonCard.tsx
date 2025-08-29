@@ -3,6 +3,7 @@ import Card from '../Card/Card'
 import styles from './ActivePokemonCard.module.css'
 import SwapIcon from '../../assets/swap-icon.svg'
 import PokemonExampleIcon from '../../assets/pokemon-example-icon.png'
+import PencilIcon from '../../assets/pencil-icon.svg'
 
 function ActivePokemonCard() {
   return (
@@ -18,6 +19,11 @@ function ActivePokemonCard() {
         </div>
         <div className={styles.pokemonLevelContainer}>10</div>
       </div>
+      <div className={styles.pokemonNameContainer}>
+        <h1 className={styles.pokemonName}>Pokemon Name</h1>
+        <img src={PencilIcon} alt="edit name button" className={styles.editButtonIcon} />
+      </div>
+      <div className={styles.divider}/>
     </Card>
   )
 }
