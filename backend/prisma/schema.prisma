@@ -4,7 +4,7 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 // All so tentative...
-```
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,4 +13,65 @@ datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  username        String            @unique
+  email           String            @unique
+  password        String
+  salt            String
+  dateJoined      DateTime
+  pokeballs       Int
+  icon            String?
+
+  // One-to-many relation for friends, consider changing to many to many?
+  friends         User[]            @relation("UserFriends")
+  friendOf        User[]            @relation("UserFriends")
+
+  // One-to-many relation to PokemonInstance
+  pokemon         PokemonInstance[] @relation("Owned_By")
+
+  //Might need to change, this is just to store featured pokemon
+  featured_pokemon Json?
+
+  tasks           Task[]
+}
+
+model PokemonInstance {
+  id             Int       @id @default(autoincrement())
+  trainerId      Int
+  trainer        User      @relation("Owned_By", fields: [trainerId], references: [id])
+  level          Int
+  exp_lvl        Int
+  nickname       String?
+
+  //Link pokemon to a particular species
+  speciesId      Int
+  species        Pokemon   @relation("Pokemon_Species", fields: [speciesId], references: [pokedex_number])
+}
+
+model Pokemon {
+  pokedex_number   Int       @id
+  primary_type     String
+  secondary_type   String?
+  level_to_evolve  Int?
+  evolves_from_id  Int?
+  evolves_from     Pokemon?  @relation("Evolution", fields: [evolves_from_id], references: [pokedex_number])
+  evolves_into     Pokemon[]  @relation("Evolution")
+  icon             String?
+
+  // Lowk idk why prisma is requiring this might need to change later...
+  instances      PokemonInstance[] @relation("Pokemon_Species")
+}
+
+model Task {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  description String
+  complete    Boolean
+  created     DateTime  @default(now())
+  lastUpdated DateTime  @updatedAt
+  dueDate     DateTime
 }
