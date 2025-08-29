@@ -16,6 +16,7 @@
 }
 
 .swapButton {
+    transition: transform 0.1s ease;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,6 +31,7 @@
 
 .swapButton:hover {
     opacity: 85%;
+    transform: scale(1.2);
 }
 
 .swapButtonIcon {
@@ -91,6 +93,7 @@
 }
 
 .editButtonIcon {
+    transition: transform 0.1s ease;
     position: absolute;
     top: 0;
     right: 2rem;
@@ -99,8 +102,9 @@
     width: 1.5rem;
 }
 
-.editButton:hover {
+.editButtonIcon:hover {
     opacity: 85%;
+    transform: scale(1.2);
 }
 
 /* divider */
@@ -117,4 +121,8 @@
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
+}
+
+.xpCounter {
+    transition: color 0.3s;
 }

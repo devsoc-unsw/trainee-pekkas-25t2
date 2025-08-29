@@ -7,9 +7,20 @@ import PencilIcon from '../../assets/pencil-icon.svg'
 import PokemonElementTag from '../PokemonElementTag/PokemonElementTag'
 import ProgressBar from '../ProgressBar/ProgressBar'
 
-function ActivePokemonCard() {
-  const [xp, setXp] = useState<number>(70);
+// temporary type since no route yet
+type pokemonData = {
+  level: number,
+  exp_lvl: number,
+  nickname: string,
+  icon: string
+}
 
+type ActivePokemonCardProps = {
+  data: pokemonData
+  // more props if needed...
+}
+
+function ActivePokemonCard({ data }: ActivePokemonCardProps) {
   return (
     <Card className={styles.pokemonCard}>
       <div className={styles.swapButtonContainer}>
@@ -19,12 +30,12 @@ function ActivePokemonCard() {
       </div>
       <div className={styles.pokemonContainer}>
         <div className={styles.pokemonProfileContainer}>
-          <img src={PokemonExampleIcon} alt="image of a pokemon" className={styles.pokemonIcon} />
+          <img src={data.icon} alt={`image of ${data.nickname}`} className={styles.pokemonIcon} />
         </div>
-        <div className={styles.pokemonLevelContainer}>10</div>
+        <div className={styles.pokemonLevelContainer}>{data.level}</div>
       </div>
       <div className={styles.pokemonNameContainer}>
-        <h1 className={styles.pokemonName}>Pokemon Name</h1>
+        <h1 className={styles.pokemonName}>{data.nickname}</h1>
         <img src={PencilIcon} alt="edit name button" className={styles.editButtonIcon} />
       </div>
       <div className={styles.divider}/>
@@ -32,11 +43,8 @@ function ActivePokemonCard() {
         <PokemonElementTag element='flying'/>
         <PokemonElementTag element='electric'/>
       </div>
-      <div>
-        <span>XP</span>
-        <span>  +10XP</span>
-      </div>
-      <ProgressBar percentFilled={80}/>
+      <span>XP: <span className={styles.xpCounter}>{data.exp_lvl}/100</span></span>
+      <ProgressBar percentFilled={data.exp_lvl}/>
     </Card>
   )
 }
