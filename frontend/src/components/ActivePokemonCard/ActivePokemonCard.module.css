@@ -10,6 +10,7 @@
 .swapButtonContainer {
     display: flex;
     justify-content: end;
+    margin-bottom: 3rem;
 }
 
 .swapButton {
@@ -22,10 +23,56 @@
     border: none; 
     border-radius: 100%;
     background-color: #8e8e8e;
+    cursor: pointer;
+}
+
+.swapButton:hover {
+    opacity: 85%;
 }
 
 .swapButtonIcon {
-    height: 20px;
+    height: 16px;
     width: auto;
     filter: brightness(0) invert(1);
+}
+
+.pokemonContainer {
+    position: relative;
+    height: 15rem;
+    width: 15rem;
+    margin: auto;
+}
+
+.pokemonProfileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 100%;
+    padding: 1.5rem;
+    aspect-ratio: 1/1;
+    margin: auto;
+}
+
+.pokemonIcon {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+}
+
+.pokemonLevelContainer {
+    font-size: 1.5rem;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #0fa1a8;
+    opacity: 70%;
+    border-radius: 100%;
+    height: 4.25rem;
+    width: 4.25rem;
 }
