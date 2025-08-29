@@ -4,6 +4,7 @@ import styles from './ActivePokemonCard.module.css'
 import SwapIcon from '../../assets/swap-icon.svg'
 import PokemonExampleIcon from '../../assets/pokemon-example-icon.png'
 import PencilIcon from '../../assets/pencil-icon.svg'
+import PokemonElementTag from '../PokemonElementTag/PokemonElementTag'
 
 function ActivePokemonCard() {
   return (
@@ -24,6 +25,10 @@ function ActivePokemonCard() {
         <img src={PencilIcon} alt="edit name button" className={styles.editButtonIcon} />
       </div>
       <div className={styles.divider}/>
+      <div className={styles.elementsContainer}>
+        <PokemonElementTag element='flying'/>
+        <PokemonElementTag element='electric'/>
+      </div>
     </Card>
   )
 }

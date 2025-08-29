@@ -108,4 +108,12 @@
     background-color: #8e8e8e;
     height: 1px;
     width: 100%;
+    margin: 1rem;
+}
+
+/* element container */
+.elementsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
 }
