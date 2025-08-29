@@ -4,6 +4,7 @@ import SwapIcon from '../../assets/swap-icon.svg'
 import PencilIcon from '../../assets/pencil-icon.svg'
 import PokemonElementTag from '../PokemonElementTag/PokemonElementTag'
 import ProgressBar from '../ProgressBar/ProgressBar'
+import { useState } from 'react'
 
 type pokemonData = {
   level: number,
@@ -19,6 +20,8 @@ type ActivePokemonCardProps = {
 }
 
 function ActivePokemonCard({ data }: ActivePokemonCardProps) {
+  const [isEditing, setIsEditing] = useState<boolean>(false)
+
   return (
     <Card className={styles.pokemonCard}>
       <div className={styles.swapButtonContainer}>
@@ -33,8 +36,29 @@ function ActivePokemonCard({ data }: ActivePokemonCardProps) {
         <div className={styles.pokemonLevelContainer}>{data.level}</div>
       </div>
       <div className={styles.pokemonNameContainer}>
-        <h1 className={styles.pokemonName}>{data.nickname}</h1>
-        <img src={PencilIcon} alt="edit name button" className={styles.editButtonIcon} />
+        {/* Default pokemon name display */}
+        <div style={{ display: isEditing ? 'none' : 'block' }}>
+          <h1 className={styles.pokemonName}>{data.nickname}</h1>
+          <img 
+            src={PencilIcon}
+            alt="edit name button"
+            className={styles.editButtonIcon}
+            onClick={() => setIsEditing(true)}
+          />
+        </div>
+        
+        {/* Edit mode */}
+        <div 
+          className={styles.editModeContainer}
+          style={{ display: isEditing ? 'flex' : 'none'}}
+        >
+          <input type="text" className={styles.editModeContainerInput}/>
+          <div className={styles.editModeButtonContainer}>
+            <button className={styles.editModeContainerCancelButton}>Cancel</button>
+            <button className={styles.editModeContainerSaveButton}>Save</button>
+          </div>
+        </div>
+
       </div>
       <div className={styles.divider}/>
       <div className={styles.elementsContainer}>

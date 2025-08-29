@@ -90,6 +90,8 @@
 .pokemonName {
     text-align: center;
     font-weight: normal;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .editButtonIcon {
@@ -105,6 +107,57 @@
 .editButtonIcon:hover {
     opacity: 85%;
     transform: scale(1.2);
+}
+
+.editModeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.editModeContainerInput {
+    font-size: 2rem;
+    border: 1px solid#8e8e8e ;
+    text-align: center;
+    border-radius: 3rem;
+    width: 75%;
+}
+
+.editModeButtonContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editModeContainerSaveButton {
+    font-size: 1rem;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid#8e8e8e ;
+    border-radius: 0.25rem;
+}
+
+.editModeContainerSaveButton:hover {
+    background-color: #51c965;
+    border: 1px solid#51c965 ;
+}
+
+.editModeContainerCancelButton {
+    font-size: 1rem;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid#8e8e8e ;
+    border-radius: 0.25rem;
+}
+
+.editModeContainerCancelButton:hover {
+    background-color: #9c9c9c;
+    border: 1px solid#9c9c9c ;
 }
 
 /* divider */
