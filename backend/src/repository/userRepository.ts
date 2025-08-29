@@ -11,7 +11,16 @@ class userRepository {
 
         return res;
     }
-    //resetemojilol
+
+    async getUserByUsername(username:string) {
+        const res = await prisma.user.findFirst({
+            where: {
+                username: username,
+            },
+        });
+        return res;
+    }
+
     async createUser(username:string, email:string, password:string, salt:string) {
         const newUser = await prisma.user.create({
         data: {
