@@ -21,6 +21,23 @@ type ActivePokemonCardProps = {
 
 function ActivePokemonCard({ data }: ActivePokemonCardProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [nickname, setNickname] = useState<string>(data.nickname)
+  const [newNickname, setNewNickname] = useState<string>(data.nickname)
+
+  const cancelChangeNickname = () => {
+    setIsEditing(false)
+    setNewNickname(nickname)
+  }
+
+  const changeNickname = () => {
+    setIsEditing(false)
+    setNickname(newNickname)
+
+    // only request name change if name actually changed
+    if (nickname !== newNickname) {
+      console.log(`send req to backend to change nickname from ${nickname} to ${newNickname}`)
+    }
+  }
 
   return (
     <Card className={styles.pokemonCard}>
@@ -38,7 +55,7 @@ function ActivePokemonCard({ data }: ActivePokemonCardProps) {
       <div className={styles.pokemonNameContainer}>
         {/* Default pokemon name display */}
         <div style={{ display: isEditing ? 'none' : 'block' }}>
-          <h1 className={styles.pokemonName}>{data.nickname}</h1>
+          <h1 className={styles.pokemonName}>{nickname}</h1>
           <img 
             src={PencilIcon}
             alt="edit name button"
@@ -52,10 +69,19 @@ function ActivePokemonCard({ data }: ActivePokemonCardProps) {
           className={styles.editModeContainer}
           style={{ display: isEditing ? 'flex' : 'none'}}
         >
-          <input type="text" className={styles.editModeContainerInput}/>
+          <input 
+            type="text"
+            className={styles.editModeContainerInput}
+            onChange={(e) => setNewNickname(e.target.value)}
+            value={newNickname}
+          />
           <div className={styles.editModeButtonContainer}>
-            <button className={styles.editModeContainerCancelButton}>Cancel</button>
-            <button className={styles.editModeContainerSaveButton}>Save</button>
+            <button type='button' className={styles.editModeContainerCancelButton} onClick={cancelChangeNickname}>
+              Cancel
+            </button>
+            <button type='button' className={styles.editModeContainerSaveButton} onClick={changeNickname}>
+              Save
+            </button>
           </div>
         </div>
 
