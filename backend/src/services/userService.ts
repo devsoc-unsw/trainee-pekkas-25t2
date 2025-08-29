@@ -15,6 +15,7 @@ class userService {
 
         //add user prisma
         const newUser = await userRepository.createUser(username, email, hashedPassword, salt);
+        console.log(newUser);
         return newUser;
     }
 

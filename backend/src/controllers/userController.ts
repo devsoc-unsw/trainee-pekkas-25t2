@@ -12,6 +12,7 @@ class userController {
         //add user prisma
         const newUser = await userService.registerUser(username, email, password);
         if (!newUser) {
+            console.log(newUser)
             return res.status(400).json({
                 error:"Account using Username or Email already exists"
             })

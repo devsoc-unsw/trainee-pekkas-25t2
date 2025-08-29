@@ -13,7 +13,7 @@ class userRepository {
     }
 
     async createUser(username:string, email:string, password:string, salt:string) {
-        await prisma.user.create({
+        const newUser = await prisma.user.create({
         data: {
             username,
             email,
@@ -27,6 +27,7 @@ class userRepository {
             username: true,
         },
         });
+        return newUser;
     }
 }
 
