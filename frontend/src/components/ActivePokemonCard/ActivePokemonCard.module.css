@@ -1,0 +1,31 @@
+.pokemonCard {
+    border: 1px solid #b1b1b1;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.swapButtonContainer {
+    display: flex;
+    justify-content: end;
+}
+
+.swapButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: none; 
+    border-radius: 100%;
+    background-color: #8e8e8e;
+}
+
+.swapButtonIcon {
+    height: 20px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
