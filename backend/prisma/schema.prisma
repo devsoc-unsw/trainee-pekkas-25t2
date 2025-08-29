@@ -31,11 +31,19 @@ model User {
 
   // One-to-many relation to PokemonInstance
   pokemon         PokemonInstance[] @relation("Owned_By")
-
+  activeSlot      ActivePokemon?
   //Might need to change, this is just to store featured pokemon
   featured_pokemon Json?
 
   tasks           Task[]
+}
+
+model ActivePokemon {
+  // one-to-one by sharing PK with user
+  userId           Int   @id
+  user             User  @relation(fields: [userId], references: [id], map: "fk_active_slot_user")
+  pokemonId        Int   @unique
+  pokemon          PokemonInstance @relation(fields: [pokemonId], references: [id], map: "fk_active_slot_pokemon")
 }
 
 model PokemonInstance {
@@ -45,6 +53,7 @@ model PokemonInstance {
   level          Int
   exp_lvl        Int
   nickname       String?
+  activeSlot     ActivePokemon?
 
   //Link pokemon to a particular species
   speciesId      Int
