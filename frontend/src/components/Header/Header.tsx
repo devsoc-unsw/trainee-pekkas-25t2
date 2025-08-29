@@ -2,14 +2,16 @@ import classes from "./Header.module.css"
 
 function Header() {
   return (
+    <>
     <div className={classes.header}>
-      <div className={classes.headerText}>
+      <h1 className={classes.headerText}>
         HABITMON
-      </div>
+      </h1>
+    </div>
 
-      <div className={classes.bottomPad}>
-    </div>
-    </div>
+    {/** Div for black, pokemon-esque border btw header and page content */}
+    <div className={classes.bottomPad}></div>
+    </>
   )
 }
 

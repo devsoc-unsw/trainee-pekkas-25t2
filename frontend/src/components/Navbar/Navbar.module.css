@@ -1,9 +1,9 @@
 .navbar {
+  /* Dimensions of the navbar */
   width: 70vw;
-  height: 10vh;
+  height: 5rem;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 72vh;
 
   background-color: #EEEEEE;
   display: flex;
@@ -21,7 +21,7 @@
   cursor: pointer;
   padding: 1rem;
 
-  transition:transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .itemUnclicked:hover {
@@ -35,7 +35,7 @@
   cursor: pointer;
   padding: 1rem;
 
-  transition:transform 0.2s ease;
+  transition: transform 0.2s ease;
 
   filter: brightness(0) invert(1);
 }
@@ -55,4 +55,11 @@
 
   border-radius: 100px;
   background-color: #65B1B5;
+}
+
+.navbarWrapper {
+  position: fixed;
+  bottom: 0;
+  padding-bottom: 5vh;
+  width: 100vw;
 }

@@ -5,12 +5,12 @@ import classes from "./LandingPage.module.css"
 import React from 'react'
 
 function LandingPage() {
-  return (
-    <div className={classes.wrapper}>
-      <Header/>
-      <NavBar/>
-    </div>
-  )
+    return (
+        <div className={classes.wrapper}>
+            <Header />
+            <NavBar />
+        </div>
+    )
 }
 
 export default LandingPage
