@@ -11,7 +11,7 @@ class userRepository {
 
         return res;
     }
-
+    //resetemojilol
     async createUser(username:string, email:string, password:string, salt:string) {
         const newUser = await prisma.user.create({
         data: {
