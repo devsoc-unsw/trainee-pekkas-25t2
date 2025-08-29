@@ -112,7 +112,8 @@
     background-color: #8e8e8e;
     height: 1px;
     width: 100%;
-    margin: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 /* element container */

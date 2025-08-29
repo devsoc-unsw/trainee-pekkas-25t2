@@ -1,18 +1,16 @@
-import React, { useState } from 'react'
 import Card from '../Card/Card'
 import styles from './ActivePokemonCard.module.css'
 import SwapIcon from '../../assets/swap-icon.svg'
-import PokemonExampleIcon from '../../assets/pokemon-example-icon.png'
 import PencilIcon from '../../assets/pencil-icon.svg'
 import PokemonElementTag from '../PokemonElementTag/PokemonElementTag'
 import ProgressBar from '../ProgressBar/ProgressBar'
 
-// temporary type since no route yet
 type pokemonData = {
   level: number,
   exp_lvl: number,
   nickname: string,
   icon: string
+  type: string[]
 }
 
 type ActivePokemonCardProps = {
@@ -40,8 +38,7 @@ function ActivePokemonCard({ data }: ActivePokemonCardProps) {
       </div>
       <div className={styles.divider}/>
       <div className={styles.elementsContainer}>
-        <PokemonElementTag element='flying'/>
-        <PokemonElementTag element='electric'/>
+        {data.type.map((t) => <PokemonElementTag element={t}/>)}
       </div>
       <span>XP: <span className={styles.xpCounter}>{data.exp_lvl}/100</span></span>
       <ProgressBar percentFilled={data.exp_lvl}/>

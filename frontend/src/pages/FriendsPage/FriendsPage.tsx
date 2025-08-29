@@ -2,10 +2,11 @@ import ActivePokemonCard from "../../components/ActivePokemonCard/ActivePokemonC
 import FriendBox from "../../components/FriendBox/FriendBox"
 
 const example_pokemon_instance_data = {
-  level: 3,
+  level: 36,
   exp_lvl: 50,
-  nickname: "Pikachu",
-  icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/25.png"
+  nickname: "charizard",
+  icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+  type: ["fire", "flying"]
 }
 
 function FriendsPage() {
