@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from '../Card/Card'
 import styles from './ActivePokemonCard.module.css'
 import SwapIcon from '../../assets/swap-icon.svg'
 import PokemonExampleIcon from '../../assets/pokemon-example-icon.png'
 import PencilIcon from '../../assets/pencil-icon.svg'
 import PokemonElementTag from '../PokemonElementTag/PokemonElementTag'
+import ProgressBar from '../ProgressBar/ProgressBar'
 
 function ActivePokemonCard() {
+  const [xp, setXp] = useState<number>(70);
+
   return (
     <Card className={styles.pokemonCard}>
       <div className={styles.swapButtonContainer}>
@@ -29,6 +32,11 @@ function ActivePokemonCard() {
         <PokemonElementTag element='flying'/>
         <PokemonElementTag element='electric'/>
       </div>
+      <div>
+        <span>XP</span>
+        <span>  +10XP</span>
+      </div>
+      <ProgressBar percentFilled={80}/>
     </Card>
   )
 }
