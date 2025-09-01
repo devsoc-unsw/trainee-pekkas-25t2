@@ -4,16 +4,36 @@ import todoIcon from "../../assets/todo_icon.png"
 import packIcon from "../../assets/pack_icon.png"
 import pokeballIcon from "../../assets/pokeball_icon.png"
 import { useState } from 'react';
+import { useNavigate } from "react-router"
 
-type Pages = "friend" | "todo" | "pokeball" | "pack"
+type Pages = "friends" | "todo" | "pokemon" | "pack"
 
 function NavBar() {
-  const [clicked, setClicked] = useState<Pages>("todo");
+  const url = window.location.href
+  const locationString = url.substring(url.lastIndexOf('/') + 1)
+
+  const pageHash: Record<string, Pages> = {
+    "friends": "friends",
+    "todo": "todo",
+    "pokemon": "pokemon",
+    "pack": "pack",
+  }
+  const location = pageHash[locationString]
+
+  const [clicked, setClicked] = useState<Pages>(location);
+  const navigate = useNavigate();
 
   const onClickHandler = (page: Pages) => {
-    // TODO: navigation
-
     setClicked(page);
+
+    const pathHash: Record<Pages, string> = {
+      todo: "/todo",
+      friends: "/friends",
+      pokemon: "/pokemon",
+      pack: "/pack",
+    }
+
+    navigate(pathHash[page]);
   }
 
   return (
@@ -30,21 +50,21 @@ function NavBar() {
           </div>
 
           <div
-            className={clicked === "friend" ? classes.itemWrapperClicked : classes.itemWrapperUnclicked}
-            onClick={() => onClickHandler("friend")}>
+            className={clicked === "friends" ? classes.itemWrapperClicked : classes.itemWrapperUnclicked}
+            onClick={() => onClickHandler("friends")}>
             <img
-              className={clicked === "friend" ? classes.itemClicked : classes.itemUnclicked}
+              className={clicked === "friends" ? classes.itemClicked : classes.itemUnclicked}
               src={friendIcon}
-              onClick={() => onClickHandler("friend")}></img>
+              onClick={() => onClickHandler("friends")}></img>
           </div>
 
           <div
-            className={clicked === "pokeball" ? classes.itemWrapperClicked : classes.itemWrapperUnclicked}
-            onClick={() => onClickHandler("pokeball")}>
+            className={clicked === "pokemon" ? classes.itemWrapperClicked : classes.itemWrapperUnclicked}
+            onClick={() => onClickHandler("pokemon")}>
             <img
-              className={clicked === "pokeball" ? classes.itemClicked : classes.itemUnclicked}
+              className={clicked === "pokemon" ? classes.itemClicked : classes.itemUnclicked}
               src={pokeballIcon}
-              onClick={() => onClickHandler("pokeball")}></img>
+              onClick={() => onClickHandler("pokemon")}></img>
           </div>
 
           <div

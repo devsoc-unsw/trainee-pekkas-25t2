@@ -1,8 +1,15 @@
+import classes from "./FriendBox.module.css"
+
 function FriendBox() {
   return (
-    <div>
-      Hello from FriendBox
-    </div>
+    <>
+      <div className={classes.friendBox}>
+        <div className={classes.friendIcon}></div>
+        <p className={classes.friendName}>
+          Friend Name
+        </p>
+      </div >
+    </>
   )
 }
 
