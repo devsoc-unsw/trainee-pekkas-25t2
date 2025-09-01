@@ -1,10 +1,7 @@
 import express, { type Request, type Response } from "express";
-import session, { Session } from "express-session";
+import session from "express-session";
 import cors from "cors";
-import { RedisStore } from "connect-redis";
-import { createClient } from "redis";
-import { config } from "dotenv";
-import { redisClient, redisStore } from "./config/redis";
+import { redisStore } from "./config/redis";
 import userrouter from "./routes/userRoutes";
 declare module "express-session" {
   interface SessionData {
@@ -29,7 +26,7 @@ if (process.env["ALLOWED_ORIGINS"] === undefined || process.env["ALLOWED_ORIGINS
 
 const app = express();
 const SERVER_PORT = 5180;
-const SALT_ROUNDS = 10;
+const _SALT_ROUNDS = 10;
 
 app.use(
   cors({
@@ -59,7 +56,7 @@ app.use(
   }),
 );
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   console.log("Hello, TypeScript with Express :)))!");
   res.send("Hello, TypeScript with Express :)))!");
 });

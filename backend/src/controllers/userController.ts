@@ -1,6 +1,5 @@
-import express, { type Request, type Response } from "express";
+import type { Request, Response } from "express";
 import userService from "../services/userService";
-import { error } from "console";
 import dayjs from "dayjs";
 import bcrypt from "bcrypt";
 
@@ -56,7 +55,7 @@ class userController {
         email: user.email,
         dateJoined: user.dateJoined,
       });
-    } catch (error) {
+    } catch (_error) {
       return res.status(500).json({ error: "Error logging in" });
     }
   }

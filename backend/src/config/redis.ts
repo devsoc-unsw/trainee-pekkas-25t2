@@ -1,6 +1,5 @@
 import { createClient } from "redis";
 import { RedisStore } from "connect-redis";
-import session from "express-session";
 
 const redisClient = createClient({
   url: `redis://localhost:${process.env["REDIS_PORT"]}`,

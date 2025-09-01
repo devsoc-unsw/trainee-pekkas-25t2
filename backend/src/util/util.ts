@@ -1,4 +1,4 @@
-import { redisClient, redisStore } from "../config/redis";
+import { redisClient, } from "../config/redis";
 
 /**
  * Validates a given session object, checking if it exists in Redis and if it has expired.
