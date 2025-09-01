@@ -7,13 +7,10 @@ import TodoPage from './pages/TodoPage/TodoPage';
 import FriendsPage from './pages/FriendsPage/FriendsPage';
 import PokemonPage from './pages/PokemonPage/PokemonPage';
 import PackPage from './pages/PackPage/PackPage';
-import Navbar from './components/Navbar/Navbar'
 
 function App() {
-
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
