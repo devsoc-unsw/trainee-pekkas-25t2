@@ -1,20 +1,17 @@
 .friendList {
   background-color: #808080;
 
-  width: 60vw;
+  width: 57.5vw;
   height: 60vh;
+  align-items: center;
 
   overflow-y: scroll;
 
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   margin-left: 5rem;
 
   display: flex;
   flex-direction: column;
 
   border-radius: 10pt;
-}
-
-.listContainer {
-  margin-left: 1rem;
 }

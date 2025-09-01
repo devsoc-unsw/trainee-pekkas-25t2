@@ -9,7 +9,6 @@ import { useNavigate } from "react-router"
 type Pages = "friends" | "todo" | "pokemon" | "pack"
 
 function NavBar() {
-  // get the current URL
   const url = window.location.href
   const locationString = url.substring(url.lastIndexOf('/') + 1)
 

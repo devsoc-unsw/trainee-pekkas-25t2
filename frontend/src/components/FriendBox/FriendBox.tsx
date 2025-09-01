@@ -5,9 +5,9 @@ function FriendBox() {
     <>
       <div className={classes.friendBox}>
         <div className={classes.friendIcon}></div>
-        <div className={classes.friendName}>
+        <p className={classes.friendName}>
           Friend Name
-        </div>
+        </p>
       </div >
     </>
   )

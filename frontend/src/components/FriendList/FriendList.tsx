@@ -5,9 +5,7 @@ function FriendList() {
   return (
     <>
       <div className={classes.friendList}>
-        <div className={classes.listContainer}>
-          <FriendBox></FriendBox>
-          <FriendBox></FriendBox>
+        <div>
           <FriendBox></FriendBox>
           <FriendBox></FriendBox>
           <FriendBox></FriendBox>
