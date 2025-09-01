@@ -1,5 +1,6 @@
 import ActivePokemonCard from "../../components/ActivePokemonCard/ActivePokemonCard";
 import FriendBox from "../../components/FriendBox/FriendBox"
+import Navbar from "../../components/Navbar/Navbar";
 
 const example_pokemon_instance_data = {
   level: 36,
@@ -15,6 +16,7 @@ function FriendsPage() {
       Hello from FriendPage
       <FriendBox></FriendBox>
       <ActivePokemonCard data={example_pokemon_instance_data}/>
+      <Navbar/>
     </div>
   )
 }

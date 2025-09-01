@@ -1,7 +1,17 @@
-.bar {
-    position: relative;
-    height: 1.5rem;
-    background-color: #eeeeee;
+@media screen and (min-width: 0px) {
+    .bar {
+        position: relative;
+        height: 1rem;
+        background-color: #eeeeee;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .bar {
+        position: relative;
+        height: 1.5rem;
+        background-color: #eeeeee;
+    }
 }
 
 .progress {
