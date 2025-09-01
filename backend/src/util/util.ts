@@ -5,7 +5,7 @@ import { redisClient, redisStore } from "../config/redis";
  * @param session The session object to validate.
  * @returns The session object if it is valid, false if it is not.
  */
-const validateSession = async (session: any) => {
+export const validateSession = async (session: any) => {
   if (!session || !session.id) {
     return false;
   }

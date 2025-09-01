@@ -5,9 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx ts-node -r dotenv/config src/index.ts",
-    "format:fix": "npm biome format --write .",
-    "lint:fix": "npm biome lint --write .",
-    "fix": "npm lint:fix && npm format:fix"
+    "format:fix": "npx biome format --write .",
+    "lint:fix": "npx biome lint --write .",
+    "fix": "npm run lint:fix && npm run format:fix"
   },
   "keywords": [],
   "author": "",
