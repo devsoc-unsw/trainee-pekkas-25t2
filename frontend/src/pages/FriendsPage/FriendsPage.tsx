@@ -1,10 +1,11 @@
-import FriendBox from "../../components/FriendBox/FriendBox"
+import FriendList from "../../components/FriendList/FriendList"
+import Header from "../../components/Header/Header"
 
 function FriendsPage() {
   return (
     <div>
-      Hello from FriendPage
-      <FriendBox></FriendBox>
+      <Header />
+      <FriendList />
     </div>
   )
 }

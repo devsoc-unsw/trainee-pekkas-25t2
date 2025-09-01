@@ -4,16 +4,25 @@ import todoIcon from "../../assets/todo_icon.png"
 import packIcon from "../../assets/pack_icon.png"
 import pokeballIcon from "../../assets/pokeball_icon.png"
 import { useState } from 'react';
+import { useNavigate } from "react-router"
 
-type Pages = "friend" | "todo" | "pokeball" | "pack"
+type Pages = "friends" | "todo" | "pokeball" | "pack"
 
 function NavBar() {
   const [clicked, setClicked] = useState<Pages>("todo");
+  const navigate = useNavigate();
 
   const onClickHandler = (page: Pages) => {
-    // TODO: navigation
-
     setClicked(page);
+
+    const hash: Record<Pages, string> = {
+      todo: "/todo",
+      friends: "/friends",
+      pokeball: "/pokemon",
+      pack: "/pack",
+    }
+
+    navigate(hash[page]);
   }
 
   return (
@@ -30,12 +39,12 @@ function NavBar() {
           </div>
 
           <div
-            className={clicked === "friend" ? classes.itemWrapperClicked : classes.itemWrapperUnclicked}
-            onClick={() => onClickHandler("friend")}>
+            className={clicked === "friends" ? classes.itemWrapperClicked : classes.itemWrapperUnclicked}
+            onClick={() => onClickHandler("friends")}>
             <img
-              className={clicked === "friend" ? classes.itemClicked : classes.itemUnclicked}
+              className={clicked === "friends" ? classes.itemClicked : classes.itemUnclicked}
               src={friendIcon}
-              onClick={() => onClickHandler("friend")}></img>
+              onClick={() => onClickHandler("friends")}></img>
           </div>
 
           <div

@@ -1,0 +1,20 @@
+.friendList {
+  background-color: #808080;
+
+  width: 60vw;
+  height: 60vh;
+
+  overflow-y: scroll;
+
+  margin-top: 3rem;
+  margin-left: 5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 10pt;
+}
+
+.listContainer {
+  margin-left: 1rem;
+}
