@@ -4,13 +4,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx ts-node -r dotenv/config src/index.ts"
+    "start": "npx ts-node -r dotenv/config src/index.ts",
+    "format:fix": "npm biome format --write .",
+    "lint:fix": "npm biome lint --write .",
+    "fix": "npm lint:fix && npm format:fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@biomejs/biome": "2.2.2",
     "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
