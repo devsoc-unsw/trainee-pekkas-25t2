@@ -4,6 +4,7 @@ import cors from "cors";
 import { RedisStore } from "connect-redis";
 import { createClient } from "redis";
 import { config } from "dotenv";
+import { redisClient, redisStore } from "./config/redis";
 import userrouter from './routes/userRoutes';
 declare module "express-session" {
   interface SessionData {
@@ -31,18 +32,6 @@ if (
 } else {
   allowed_origins = process.env["ALLOWED_ORIGINS"]?.split(",");
 }
-
-let redisClient = createClient({
-  url: `redis://localhost:${process.env["REDIS_PORT"]}`,
-});
-
-redisClient.connect().catch(console.error);
-
-// Initialize store.
-let redisStore = new RedisStore({
-  client: redisClient,
-  prefix: "session:",
-});
 
 const app = express();
 const SERVER_PORT = 5180;
