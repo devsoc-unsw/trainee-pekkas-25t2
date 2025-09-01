@@ -1,0 +1,252 @@
+.pokemonCard {
+    border: 1px solid #b1b1b1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 17.5rem;
+}
+
+/* swap button */
+.swapButtonContainer {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 2rem;
+}
+
+.swapButton {
+    transition: transform 0.1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem;
+    height: 1rem;
+    width: 1rem;
+    border: none; 
+    border-radius: 100%;
+    background-color: #8e8e8e;
+    cursor: pointer;
+}
+
+.swapButton:hover {
+    opacity: 85%;
+    transform: scale(1.2);
+}
+
+.swapButtonIcon {
+    height: 16px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+/* pokemon avatar */
+.pokemonContainer {
+    position: relative;
+    height: 12rem;
+    width: 12rem;
+    margin: auto;
+}
+
+.pokemonProfileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 100%;
+    padding: 1rem;
+    aspect-ratio: 1/1;
+    margin: auto;
+}
+
+.pokemonIcon {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+}
+
+.pokemonLevelContainer {
+    font-size: 1.15rem;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #0fa1a8;
+    opacity: 70%;
+    border-radius: 100%;
+    height: 3.25rem;
+    width: 3.25rem;
+}
+
+/* pokemon name */
+.pokemonNameContainer {
+    position: relative;
+}
+
+.pokemonName {
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.editButtonIcon {
+    transition: transform 0.1s ease;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    cursor: pointer;
+    height: 1.15rem;
+    width: 1.15rem;
+}
+
+.editButtonIcon:hover {
+    opacity: 85%;
+    transform: scale(1.2);
+}
+
+.editModeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.editModeContainerInput {
+    font-size: 1.5rem;
+    border: 1px solid#8e8e8e ;
+    text-align: center;
+    border-radius: 3rem;
+    width: 55%;
+}
+
+.editModeButtonContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editModeContainerSaveButton {
+    font-size: 1rem;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid#8e8e8e ;
+    border-radius: 0.25rem;
+}
+
+.editModeContainerSaveButton:hover {
+    background-color: #51c965;
+    border: 1px solid#51c965 ;
+}
+
+.editModeContainerCancelButton {
+    font-size: 1rem;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid#8e8e8e ;
+    border-radius: 0.25rem;
+}
+
+.editModeContainerCancelButton:hover {
+    background-color: #9c9c9c;
+    border: 1px solid#9c9c9c ;
+}
+
+/* divider */
+.divider {
+    background-color: #8e8e8e;
+    height: 1px;
+    width: 100%;
+    margin-bottom: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+/* element container */
+.elementsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.xpCounter {
+    transition: color 0.3s;
+}
+
+/* tablet/desktop */
+@media screen and (min-width: 800px) {
+    .pokemonCard {
+        padding: 1.5rem;
+        width: 30rem;
+    }
+    
+    /* swap button */
+    .swapButtonContainer {
+        margin-bottom: 3rem;
+    }
+    
+    .swapButton {
+        padding: 1.5rem;
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+    
+    /* pokemon avatar */
+    .pokemonContainer {
+        height: 15rem;
+        width: 15rem;
+    }
+    
+    .pokemonProfileContainer {
+        padding: 1.5rem;
+    }
+    
+    .pokemonIcon {
+        width: 85%;
+        height: 85%;
+    }
+    
+    .pokemonLevelContainer {
+        font-size: 1.5rem;
+        top: -0.5rem;
+        right: -0.5rem;
+        height: 4.25rem;
+        width: 4.25rem;
+    }
+    
+    /* pokemon name */
+    .pokemonName {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .editButtonIcon {
+        top: 0;
+        right: 2rem;
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+    
+    .editModeContainerInput {
+        font-size: 2rem;
+        width: 75%;
+    }
+    
+    /* element container */
+    .elementsContainer {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+}
+
