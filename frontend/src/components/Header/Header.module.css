@@ -11,8 +11,10 @@
 .headerText {
   color: white;
   margin: 0;
+  font-size: 32pt;
 
   padding-left: 10vw;
+  padding-bottom: 9px;
 }
 
 .bottomPad {
@@ -20,6 +22,3 @@
   height: 11px;
   width: 100vw;
 }
-
-
-
