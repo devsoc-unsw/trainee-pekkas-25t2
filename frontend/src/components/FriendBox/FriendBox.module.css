@@ -32,5 +32,5 @@
   /* vertical centering */
   display: flex;
   align-items: center;
-  padding-top: 4px;
+  padding-bottom: 4pt;
 }
