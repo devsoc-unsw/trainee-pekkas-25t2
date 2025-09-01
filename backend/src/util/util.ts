@@ -1,5 +1,9 @@
 import { redisClient, } from "../config/redis";
 
+type SessionData = {
+  userId: number
+}
+
 /**
  * Validates a given session object, checking if it exists in Redis and if it has expired.
  * @param session The session object to validate.
@@ -21,5 +25,5 @@ export const validateSession = async (session: any) => {
     return false;
   }
 
-  return sessionData;
+  return sessionData as SessionData;
 };
