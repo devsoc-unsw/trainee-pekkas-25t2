@@ -4,7 +4,7 @@ import cors from "cors";
 import { RedisStore } from "connect-redis";
 import { createClient } from "redis";
 import { config } from "dotenv";
-
+import userrouter from './routes/userRoutes';
 declare module "express-session" {
   interface SessionData {
     userId: number;
@@ -83,6 +83,8 @@ app.get("/", (req: Request, res: Response) => {
   console.log("Hello, TypeScript with Express :)))!");
   res.send("Hello, TypeScript with Express :)))!");
 });
+
+app.use("/user", userrouter);
 
 if (process.env["NODE_ENV"] !== "test") {
   app.listen(SERVER_PORT, () => {
