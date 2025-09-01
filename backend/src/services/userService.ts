@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import userRepository from "../repository/userRepository";
 class userService {
-    async registerUser(username:string, password:string, email:string) {
+    async registerUser(username:string, email:string, password:string,) {
     const results = await userRepository.getUserByUsernameOrEmail(username, email)
 
         if (results) {
@@ -19,6 +19,10 @@ class userService {
         return newUser;
     }
 
+    async getUserByUsername(username:string) {
+        const res = await userRepository.getUserByUsername(username);
+        return res;
+    }
 }
 
 export default new userService();
