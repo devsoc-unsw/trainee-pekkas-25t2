@@ -1,4 +1,3 @@
-//JUST FILLER SO THAT DIRECTORIES ARE PUSHED UP
 import classes from "./LandingPage.module.css"
 
 function LandingPage() {
