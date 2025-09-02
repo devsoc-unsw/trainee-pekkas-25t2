@@ -1,11 +1,11 @@
-import { redisClient, redisStore } from "../config/redis";
+import { redisClient, } from "../config/redis";
 
 /**
  * Validates a given session object, checking if it exists in Redis and if it has expired.
  * @param session The session object to validate.
  * @returns The session object if it is valid, false if it is not.
  */
-const validateSession = async (session: any) => {
+export const validateSession = async (session: any) => {
   if (!session || !session.id) {
     return false;
   }
