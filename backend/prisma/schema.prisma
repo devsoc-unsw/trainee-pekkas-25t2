@@ -16,86 +16,84 @@ datasource db {
 }
 
 model User {
-  id              Int               @id @default(autoincrement())
-  username        String            @unique
-  email           String            @unique
-  password        String
-  salt            String
-  dateJoined      DateTime
-  pokeballs       Int
-  icon            String?
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
+  email      String   @unique
+  password   String
+  salt       String
+  dateJoined DateTime
+  pokeballs  Int
+  icon       String?
 
   // One-to-many relation for friends, consider changing to many to many?
-  friends         User[]            @relation("UserFriends")
-  friendOf        User[]            @relation("UserFriends")
+  friends  User[] @relation("UserFriends")
+  friendOf User[] @relation("UserFriends")
 
   // Friend requests. Need to distinguish between if a request is being received so that we can display on friends page
-  sentRequests   FriendRequest[]  @relation("SentRequests")
-  receivedRequests FriendRequest[] @relation("ReceivedRequests")
+  sentRequests     FriendRequest[]   @relation("SentRequests")
+  receivedRequests FriendRequest[]   @relation("ReceivedRequests")
   // One-to-many relation to PokemonInstance
-  pokemon         PokemonInstance[] @relation("Owned_By")
-  activeSlot      ActivePokemon?
+  pokemon          PokemonInstance[] @relation("Owned_By")
+  activeSlot       ActivePokemon?
   //Might need to change, this is just to store featured pokemon
   featured_pokemon Json?
 
-  tasks           Task[]
+  tasks Task[]
 }
 
-
 model FriendRequest {
-  id         Int   @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   // Sent by
   fromUserId Int
-  fromUser   User  @relation("SentRequests", fields: [fromUserId], references: [id], map: "fk_friendreq_from")
+  fromUser   User @relation("SentRequests", fields: [fromUserId], references: [id], map: "fk_friendreq_from")
 
   // Received by
-  toUserId   Int
-  toUser     User  @relation("ReceivedRequests", fields: [toUserId], references: [id], map: "fk_friendreq_to")
+  toUserId Int
+  toUser   User @relation("ReceivedRequests", fields: [toUserId], references: [id], map: "fk_friendreq_to")
 
-  isActive   Boolean @default(true)
-  createdAt  DateTime @default(now())
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
   @@unique([fromUserId, toUserId]) // prevents duplicate requests
 }
 
 model ActivePokemon {
   // one-to-one by sharing PK with user
-  userId           Int   @id
-  user             User  @relation(fields: [userId], references: [id], map: "fk_active_slot_user")
-  pokemonId        Int   @unique
-  pokemon          PokemonInstance @relation(fields: [pokemonId], references: [id], map: "fk_active_slot_pokemon")
+  userId    Int             @id
+  user      User            @relation(fields: [userId], references: [id], map: "fk_active_slot_user")
+  pokemonId Int             @unique
+  pokemon   PokemonInstance @relation(fields: [pokemonId], references: [id], map: "fk_active_slot_pokemon")
 }
 
 model PokemonInstance {
-  id             Int       @id @default(autoincrement())
-  trainerId      Int
-  trainer        User      @relation("Owned_By", fields: [trainerId], references: [id])
-  level          Int
-  exp_lvl        Int
-  nickname       String?
-  activeSlot     ActivePokemon?
+  id         Int            @id @default(autoincrement())
+  trainerId  Int
+  trainer    User           @relation("Owned_By", fields: [trainerId], references: [id])
+  level      Int
+  exp_lvl    Int
+  nickname   String?
+  activeSlot ActivePokemon?
 
   //Link pokemon to a particular species
-  speciesId      Int
-  species        Pokemon   @relation("Pokemon_Species", fields: [speciesId], references: [pokedex_number])
+  speciesId Int
+  species   Pokemon @relation("Pokemon_Species", fields: [speciesId], references: [pokedex_number])
 }
 
 model Pokemon {
-  pokedex_number   Int       @id
-  species_name     String    @unique
-  primary_type     String
-  secondary_type   String?
-  level_to_evolve  Int?
-  evolves_from_id  Int?
-  evolves_from     Pokemon?  @relation("Evolution", fields: [evolves_from_id], references: [pokedex_number])
-  evolves_into     Pokemon[]  @relation("Evolution")
-  icon             String?
+  pokedex_number  Int       @id
+  species_name    String    @unique
+  primary_type    String
+  secondary_type  String?
+  level_to_evolve Int?
+  evolves_from_id Int?
+  evolves_from    Pokemon?  @relation("Evolution", fields: [evolves_from_id], references: [pokedex_number])
+  evolves_into    Pokemon[] @relation("Evolution")
+  icon            String?
 
   // Lowk idk why prisma is requiring this might need to change later...
-  instances      PokemonInstance[] @relation("Pokemon_Species")
+  instances PokemonInstance[] @relation("Pokemon_Species")
 }
-
-
 
 model Task {
   id          Int       @id @default(autoincrement())
@@ -105,5 +103,5 @@ model Task {
   complete    Boolean
   created     DateTime  @default(now())
   lastUpdated DateTime  @updatedAt
-  dueDate     DateTime
+  dueDate     DateTime?
 }
