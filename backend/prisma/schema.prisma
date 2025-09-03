@@ -100,7 +100,7 @@ model Task {
   userId      Int
   user        User      @relation(fields: [userId], references: [id])
   description String
-  complete    Boolean
+  complete    Boolean   @default(false)
   created     DateTime  @default(now())
   lastUpdated DateTime  @updatedAt
   dueDate     DateTime?
