@@ -1,7 +1,5 @@
-import { Task } from "@prisma/client";
 import prisma from "../config/prisma";
-
-type UpdatableTaskFields = Pick<Task, 'description' | 'complete' | 'dueDate'>
+import { CreateTaskFields, UpdateTaskFields } from "../types/task";
 
 class taskRepository {
   async getTasksByUserId(userId: number) {
@@ -12,14 +10,9 @@ class taskRepository {
     return res;
   }
 
-  async createTask(userId: number, description: string, dueDate?: Date) {
+  async createTask(data: CreateTaskFields) {
     return await prisma.task.create({
-      data: {
-        userId,
-        description,
-        complete: false,
-        dueDate: dueDate ?? null
-      },
+      data,
       select: {
         id: true,
         userId: true,
@@ -32,9 +25,15 @@ class taskRepository {
     });
   }
 
-  async updateTask(id: number, data: UpdatableTaskFields) {
-    return prisma.task.update({
-      where: { id }, 
+  async getTaskById(id: number) {
+    return await prisma.task.findFirst({
+      where: { id },
+    });
+  }
+
+  async updateTask(taskId: number, data: UpdateTaskFields) {
+    return await prisma.task.update({
+      where: { id: taskId }, 
       data
     })
   }
