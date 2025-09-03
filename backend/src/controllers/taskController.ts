@@ -1,16 +1,10 @@
 import { Request, Response } from "express";
-import { validateSession } from "../util/util";
 import taskService from "../services/taskService";
 
 class taskController {
   async getTasks(req: Request, res: Response) {
-    const sessionData = req.session ? await validateSession(req.session) : null
-
-    if (!sessionData) {
-      return res.status(401).json({ error: "Invalid session" })
-    }
-
-    const userId = sessionData.userId
+    // this is already validated in middleware so should be safe to typecast
+    const userId = req.session.userId as number
 
     try {
       const tasks = await taskService.getTasks(userId);
