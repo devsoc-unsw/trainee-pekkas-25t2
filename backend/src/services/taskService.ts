@@ -11,6 +11,16 @@ class taskService {
     
     return tasks
   }
+
+  async createTask(userId: number, description: string, dueDate?: Date) {
+    const user = await userRepository.getUserById(userId)
+    
+    if (!user) throw new Error("Invalid user")
+
+    const tasks = await taskRepository.createTask(userId, description, dueDate)
+    
+    return tasks
+  }
 }
 
 export default new taskService()

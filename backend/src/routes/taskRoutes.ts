@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(authHandler)
 
 router.get("/", taskController.getTasks);
-// router.post("/");
+router.post("/", taskController.createTask);
 // router.put("/:id");
 // router.delete("/:id");
 export default router;

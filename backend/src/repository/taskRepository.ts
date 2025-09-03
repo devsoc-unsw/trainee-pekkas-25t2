@@ -1,4 +1,7 @@
+import { Task } from "@prisma/client";
 import prisma from "../config/prisma";
+
+type UpdatableTaskFields = Pick<Task, 'description' | 'complete' | 'dueDate'>
 
 class taskRepository {
   async getTasksByUserId(userId: number) {
@@ -9,19 +12,13 @@ class taskRepository {
     return res;
   }
 
-  async createTask(userId: number, description: string, complete: boolean, dueDate: Date) {
-    const user = await prisma.user.findFirst({
-      where: { id: userId },
-    });
-
-    if (!user) throw new Error("User does not exist");
-
+  async createTask(userId: number, description: string, dueDate?: Date) {
     return await prisma.task.create({
       data: {
         userId,
         description,
-        complete,
-        dueDate,
+        complete: false,
+        dueDate: dueDate ?? null
       },
       select: {
         id: true,
@@ -35,10 +32,11 @@ class taskRepository {
     });
   }
 
-  async getTaskById(id: number) {
-    return await prisma.task.findFirst({
-      where: { id },
-    });
+  async updateTask(id: number, data: UpdatableTaskFields) {
+    return prisma.task.update({
+      where: { id }, 
+      data
+    })
   }
 }
 
