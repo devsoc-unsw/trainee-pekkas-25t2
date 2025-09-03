@@ -15,6 +15,10 @@ export type UpdateTaskRequestBody = {
   dueDate?: string
 }
 
+export type DeleteTaskRequestParams = {
+  id: string
+}
+
 // Repository
 export type CreateTaskFields = {
   userId: number;

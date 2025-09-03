@@ -11,24 +11,22 @@ class taskRepository {
   }
 
   async createTask(data: CreateTaskFields) {
-    return await prisma.task.create({
-      data,
-      select: {
-        id: true,
-        userId: true,
-        description: true,
-        complete: true,
-        created: true,
-        lastUpdated: true,
-        dueDate: true,
-      },
-    });
-  }
-
-  async getTaskById(id: number) {
-    return await prisma.task.findFirst({
-      where: { id },
-    });
+    try {
+      return await prisma.task.create({
+        data,
+        select: {
+          id: true,
+          userId: true,
+          description: true,
+          complete: true,
+          created: true,
+          lastUpdated: true,
+          dueDate: true,
+        },
+      });
+    } catch (_error) {
+      throw new Error("Invalid user")
+    }
   }
 
   async updateTask(taskId: number, data: UpdateTaskFields) {
@@ -36,6 +34,16 @@ class taskRepository {
       where: { id: taskId }, 
       data
     })
+  }
+
+  async deleteTask(id: number) {
+    await prisma.task.delete({ where: { id } })
+  }
+
+  async getTaskById(id: number) {
+    return await prisma.task.findFirst({
+      where: { id },
+    });
   }
 }
 
