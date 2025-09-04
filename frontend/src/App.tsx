@@ -9,19 +9,19 @@ import PokemonPage from './pages/PokemonPage/PokemonPage';
 import PackPage from './pages/PackPage/PackPage';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/todo" element={<TodoPage />} />
-        <Route path="/friends" element={<FriendsPage />} />
-        <Route path="/pokemon" element={<PokemonPage />} />
-        <Route path="/pack" element={<PackPage />} />
-      </Routes>
-    </BrowserRouter>
-  )
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<LandingPage />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="/register" element={<RegisterPage />} />
+				<Route path="/todo" element={<TodoPage />} />
+				<Route path="/friends" element={<FriendsPage />} />
+				<Route path="/pokemon" element={<PokemonPage />} />
+				<Route path="/pack" element={<PackPage />} />
+			</Routes>
+		</BrowserRouter>
+	)
 }
 
 export default App

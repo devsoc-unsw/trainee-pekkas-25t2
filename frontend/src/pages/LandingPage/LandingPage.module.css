@@ -1,4 +1,47 @@
-.wrapper {
-    min-width: 100vw;
-    min-height: 100vh;
+.title {
+	display: flex;
+	justify-content: center;
+	font-size: 45pt;
+	font-weight: bold;
+}
+
+.bannerWrapper {
+	padding-top: 1rem;
+	display: flex;
+	justify-content: center;
+}
+
+.banner {
+	width: 800px;
+	height: auto;
+}
+
+.subtitle {
+	display: flex;
+	justify-content: center;
+	font-size: 25pt;
+}
+
+.startButtonWrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.startButton {
+	background-color: #65B1B5;
+	color: white;
+	width: 15rem;
+	height: 4rem;
+	border-radius: 10px;
+	font-size: 25pt;
+	display: flex;
+	justify-content: center;
+	padding-top: 1rem;
+
+	cursor: pointer;
+	transition: transform 0.1s ease;
+}
+
+.startButton:hover {
+	transform: scale(1.05);
 }
