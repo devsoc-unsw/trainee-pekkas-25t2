@@ -9,24 +9,26 @@ function LandingPage() {
 	return (
 		<>
 			<Header showSignIn={true} />
-			<div className={classes.title}>
-				<header>
-					HABITMON
-				</header>
-			</div>
-			<div className={classes.bannerWrapper}>
-				<img className={classes.banner} src={LandingPageBanner} alt="Landing page banner" />
-			</div>
-			<div className={classes.subtitle}>
-				<p>
-					Gamifying productivity... now with Pokemon™!
-				</p>
-			</div>
-			<div className={classes.startButtonWrapper}>
-				<div className={classes.startButton} onClick={() => navigate("register")}>
-					Get started
-				</div>
-			</div >
+      <div className={classes.wrapper}>
+        <div className={classes.title}>
+          <header>
+            HABITMON
+          </header>
+        </div>
+        <div className={classes.bannerWrapper}>
+          <img className={classes.banner} src={LandingPageBanner} alt="Landing page banner" />
+        </div>
+        <div className={classes.subtitle}>
+          <p>
+            Gamifying productivity... now with Pokemon™!
+          </p>
+        </div>
+        <div className={classes.startButtonWrapper}>
+          <div className={classes.startButton} onClick={() => navigate("register")}>
+            Get started
+          </div>
+        </div >
+      </div>
 		</>
 	)
 }

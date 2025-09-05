@@ -5,6 +5,12 @@
 	font-weight: bold;
 }
 
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 .bannerWrapper {
 	padding-top: 1rem;
 	display: flex;
