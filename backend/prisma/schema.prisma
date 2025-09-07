@@ -81,15 +81,18 @@ model PokemonInstance {
 }
 
 model Pokemon {
-  pokedex_number  Int       @id
-  species_name    String    @unique
-  primary_type    String
-  secondary_type  String?
-  level_to_evolve Int?
-  evolves_from_id Int?
-  evolves_from    Pokemon?  @relation("Evolution", fields: [evolves_from_id], references: [pokedex_number])
-  evolves_into    Pokemon[] @relation("Evolution")
-  icon            String?
+  pokedex_number   Int       @id
+  species_name     String    @unique
+  primary_type     String
+  secondary_type   String?
+  level_to_evolve  Int?
+  evolves_from_id  Int?
+  evolves_from     Pokemon?  @relation("Evolution", fields: [evolves_from_id], references: [pokedex_number])
+  evolves_into     Pokemon[]  @relation("Evolution")
+  icon             String?
+  base_pokemon     Boolean  @default(false)
+  rarity           String?
+
 
   // Lowk idk why prisma is requiring this might need to change later...
   instances PokemonInstance[] @relation("Pokemon_Species")
