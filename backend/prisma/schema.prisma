@@ -90,6 +90,8 @@ model Pokemon {
   evolves_from     Pokemon?  @relation("Evolution", fields: [evolves_from_id], references: [pokedex_number])
   evolves_into     Pokemon[]  @relation("Evolution")
   icon             String?
+  base_pokemon     Boolean  @default(false)
+  rarity           String?
 
   // Lowk idk why prisma is requiring this might need to change later...
   instances      PokemonInstance[] @relation("Pokemon_Species")
