@@ -2,6 +2,12 @@
 import prisma from "../config/prisma";
 
 class userRepository {
+  async getUserById(userId: number) {
+    return await prisma.user.findFirst({
+      where: { id: userId }
+    })
+  }
+
   async getUserByUsernameOrEmail(username: string, email: string) {
     const res = await prisma.user.findFirst({
       where: {
