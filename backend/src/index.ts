@@ -3,6 +3,7 @@ import session from "express-session";
 import cors from "cors";
 import { redisStore } from "./config/redis";
 import userrouter from "./routes/userRoutes";
+import taskRouter from "./routes/taskRoutes";
 declare module "express-session" {
   interface SessionData {
     userId: number;
@@ -62,6 +63,7 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 app.use("/user", userrouter);
+app.use("/task", taskRouter);
 
 if (process.env["NODE_ENV"] !== "test") {
   app.listen(SERVER_PORT, () => {
