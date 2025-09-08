@@ -12,6 +12,9 @@ class taskRepository {
 
   async createTask(data: CreateTaskFields) {
     try {
+      if (data === undefined) {
+        return null;
+      }
       return await prisma.task.create({
         data,
         select: {
@@ -31,7 +34,7 @@ class taskRepository {
 
   async updateTask(taskId: number, data: UpdateTaskFields) {
     return await prisma.task.update({
-      where: { id: taskId }, 
+      where: { id: taskId },
       data
     })
   }

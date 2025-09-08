@@ -11,7 +11,7 @@ export type UpdateTaskRequestParams = {
 
 export type UpdateTaskRequestBody = {
   description?: string,
-  complete?: boolean, 
+  complete?: boolean,
   dueDate?: string
 }
 
@@ -24,6 +24,7 @@ export type CreateTaskFields = {
   userId: number;
   description: string;
   dueDate: Date | null;
+  complete?: boolean;
 }
 
 export type UpdateTaskFields = {
