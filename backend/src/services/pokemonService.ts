@@ -25,6 +25,14 @@ class pokemonService {
         const num2:number = Math.floor(Math.random() * pokemonList.length);
         return pokemonList[num2];
     }
+
+    async getPokemonInstanceById(pokemonId:number) {
+        return await pokemonRepository.getPokemonInstanceById(pokemonId);
+    }
+
+    async getUserPokemon(userId:number) {
+        return await pokemonRepository.getPokemonInstancesByUser(userId);
+    }
 }
 
 export default new pokemonService();

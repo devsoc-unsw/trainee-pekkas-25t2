@@ -5,5 +5,7 @@ const router = express.Router();
 
 //this shouldn't be called highk mainly just so we can test the endpoint
 router.get("/random", pokemonController.getRandomPokemon);
-router.get("/owned");
+//get all a users pokemon
+router.get("/owned", pokemonController.getUserPokemon);
+router.get("/instance/:pokemonId", pokemonController.getPokemonById);
 export default router;

@@ -15,6 +15,21 @@ class pokemonRepository {
     async createPokemonInstance() {
 
     }
+
+    async getPokemonInstanceById(pokemonId:number) {
+        const res = await prisma.pokemonInstance.findMany({
+            where: { id: pokemonId },
+        });
+        return res;
+    }
+
+    async getPokemonInstancesByUser(userId:number) {
+        const res = await prisma.pokemonInstance.findMany({
+            where: {trainerId: userId}
+        })
+
+        return res;
+    }
 }
 
 export default new pokemonRepository();
