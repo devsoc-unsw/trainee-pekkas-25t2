@@ -39,6 +39,40 @@ class pokemonRepository {
 
         return res;
     }
+
+
+    async levelPokemon(pokemonId:number, exp:number) {
+        const res = await prisma.pokemonInstance.update({
+            where: {id: pokemonId},
+            data: {
+                exp_lvl: {increment: exp}
+            }
+        })
+
+        return res;
+    }
+
+    //a bit clapped logic to deal with evolution, decided to break it up like
+    //this since pokemon evolution logic can be quite strange, worth a refactor
+
+    //getAllPokemonEvos in case we have branching evos, call in case a pokemon levels up to evo level
+    async getAllPokemonEvos(pokedexNum:number) {
+        const res = await prisma.pokemon.findMany({
+            where: {evolves_from_id: pokedexNum}
+        });
+
+        return res;
+    }
+
+    //actual evo logic in all actuality this is just reassigning a pokemon to be of a diff species
+    async evolvePokemon(pokemonId:number, newPokedexNum:number) {
+        const res = await prisma.pokemonInstance.update({
+            where: {id: pokemonId},
+            data:   {speciesId: newPokedexNum}
+        })
+
+        return res;
+    }
 }
 
 export default new pokemonRepository();
