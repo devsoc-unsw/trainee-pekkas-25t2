@@ -17,7 +17,7 @@ class pokemonRepository {
     }
 
     async getPokemonInstanceById(pokemonId:number) {
-        const res = await prisma.pokemonInstance.findMany({
+        const res = await prisma.pokemonInstance.findFirst({
             where: { id: pokemonId },
         });
         return res;
@@ -27,6 +27,15 @@ class pokemonRepository {
         const res = await prisma.pokemonInstance.findMany({
             where: {trainerId: userId}
         })
+
+        return res;
+    }
+
+    async renamePokemon(pokemonId:number, newname:string) {
+        const res = await prisma.pokemonInstance.update({
+            where: {id: pokemonId},
+            data: {nickname: newname}
+        });
 
         return res;
     }

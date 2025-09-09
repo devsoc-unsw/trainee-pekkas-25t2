@@ -8,4 +8,6 @@ router.get("/random", pokemonController.getRandomPokemon);
 //get all a users pokemon
 router.get("/owned", pokemonController.getUserPokemon);
 router.get("/instance/:pokemonId", pokemonController.getPokemonById);
+router.post("/instance/rename", pokemonController.renamePokemon);
+
 export default router;

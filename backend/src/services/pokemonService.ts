@@ -21,7 +21,7 @@ class pokemonService {
         }
 
         const pokemonList = await pokemonRepository.getPokemonByRarity(rarity as string);
-        
+
         const num2:number = Math.floor(Math.random() * pokemonList.length);
         return pokemonList[num2];
     }
@@ -32,6 +32,10 @@ class pokemonService {
 
     async getUserPokemon(userId:number) {
         return await pokemonRepository.getPokemonInstancesByUser(userId);
+    }
+
+    async renamePokemon(pokemonId:number, newname:string) {
+        return await pokemonRepository.renamePokemon(pokemonId, newname);
     }
 }
 

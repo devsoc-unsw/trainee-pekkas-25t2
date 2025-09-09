@@ -38,10 +38,26 @@ class pokemonController {
             const userPokemon = await pokemonService.getUserPokemon(userId);
             return res.status(200).json(userPokemon);
         } catch (error) {
-            return res.status(500).json({error: error});
+            if (error instanceof Error) {
+                return res.status(400).json({error: error.message});
+            }
+            return res.status(500).json({error: "Internal Server Error"});
         }
     }
 
+    async renamePokemon(req:Request, res:Response) {
+        const {pokemonId, newname} = req.body;
+
+        try {
+            const retval = await pokemonService.renamePokemon(pokemonId as number, newname as string);
+            return res.status(200).json(retval);
+        } catch (error) {
+            if (error instanceof Error) {
+                return res.status(400).json({error: error.message});
+            }
+            return res.status(500).json({error: "Internal Server Error"});
+        }
+    }
 }
 
 export default new pokemonController();
