@@ -1,8 +1,11 @@
 import { Request, Response } from "express";
+import { TypedRequest, TypedRequestQuery } from "../types/requests";
 import pokemonService from "../services/pokemonService";
 import userService from "../services/userService";
+import { pokemonRenameBody } from "../types/pokemon";
 
 class pokemonController {
+    //no need to typed request this
     async getRandomPokemon(req:Request, res:Response) {
         try {
             const pokemonList = await pokemonService.getRandomPokemon();
@@ -15,6 +18,7 @@ class pokemonController {
         }
     }
 
+    //Or this, since it's in the params
     async getPokemonById(req:Request, res:Response) {
         const { pokemonId } = req.params;
         try {
@@ -46,7 +50,7 @@ class pokemonController {
         }
     }
 
-    async renamePokemon(req:Request, res:Response) {
+    async renamePokemon(req:TypedRequest<pokemonRenameBody>, res:Response) {
         const {pokemonId, newname} = req.body;
 
         try {

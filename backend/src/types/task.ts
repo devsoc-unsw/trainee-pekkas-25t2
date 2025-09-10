@@ -11,7 +11,7 @@ export type UpdateTaskRequestParams = {
 
 export type UpdateTaskRequestBody = {
   description?: string,
-  complete?: boolean, 
+  complete?: boolean,
   dueDate?: string
 }
 
