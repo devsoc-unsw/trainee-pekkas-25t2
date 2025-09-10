@@ -5,3 +5,9 @@ export enum Rarities {
     Starter = "starter",
     Legendary = "legendary"
 }
+
+export type createPokemonInstanceType = {
+    pokedexNum:number,
+    level:number,
+    trainerId:number
+}

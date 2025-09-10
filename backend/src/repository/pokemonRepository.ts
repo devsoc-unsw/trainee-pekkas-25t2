@@ -1,4 +1,5 @@
 import prisma from "../config/prisma";
+import { createPokemonInstanceType } from "../types/pokemon";
 
 class pokemonRepository {
     //seems as though prisma doesn't have a get random function, so randomness is determined by the
@@ -11,9 +12,17 @@ class pokemonRepository {
         return res;
     }
 
+    async createPokemonInstance(pokeParams:createPokemonInstanceType) {
+        const res = await prisma.pokemonInstance.create({
+            data: {
+                speciesId: pokeParams.pokedexNum,
+                level: pokeParams.level,
+                trainerId: pokeParams.trainerId,
+                exp_lvl: 0
+            }
+        })
 
-    async createPokemonInstance() {
-
+        return res;
     }
 
     async getPokemonInstanceById(pokemonId:number) {
