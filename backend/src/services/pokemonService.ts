@@ -1,4 +1,5 @@
 import pokemonRepository from "../repository/pokemonRepository";
+import userRepository from "../repository/userRepository";
 import { Rarities } from "../types/pokemon";
 
 class pokemonService {
@@ -36,6 +37,29 @@ class pokemonService {
 
     async renamePokemon(pokemonId:number, newname:string) {
         return await pokemonRepository.renamePokemon(pokemonId, newname);
+    }
+
+    async catchPokemon(userId:number) {
+        const pokemonCaught = await this.getRandomPokemon();
+        let level:number;
+
+        if (pokemonCaught === undefined) {
+            return null;
+        }
+
+        await userRepository.usePokeball(userId);
+
+        if (pokemonCaught.level_to_evolve === null) {
+            level = Math.floor(Math.random() * (15-5)) + 5
+        } else {
+            level = Math.floor(Math.random() * (pokemonCaught.level_to_evolve - 5)) + 5;
+        }
+
+        return await pokemonRepository.createPokemonInstance({
+            pokedexNum: pokemonCaught.pokedex_number,
+            level: level,
+            trainerId: userId
+        })
     }
 }
 

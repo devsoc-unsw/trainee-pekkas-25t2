@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import pokemonService from "../services/pokemonService";
+import userService from "../services/userService";
 
 class pokemonController {
     async getRandomPokemon(req:Request, res:Response) {
@@ -50,6 +51,29 @@ class pokemonController {
 
         try {
             const retval = await pokemonService.renamePokemon(pokemonId as number, newname as string);
+            return res.status(200).json(retval);
+        } catch (error) {
+            if (error instanceof Error) {
+                return res.status(400).json({error: error.message});
+            }
+            return res.status(500).json({error: "Internal Server Error"});
+        }
+    }
+
+    async catchPokemon(req:Request, res:Response) {
+        const userId = req.session.userId as number
+        try {
+            const userData = await userService.getUserById(userId);
+            if (userData === null || userData === undefined) {
+                return res.status(400).json({error: "User not found!"});
+            }
+
+            if (userData.pokeballs < 0) {
+                return res.status(400).json({error: "Not enough pokeballs!"});
+            }
+
+            //should return pokemon caught
+            const retval = await pokemonService.catchPokemon(userId);
             return res.status(200).json(retval);
         } catch (error) {
             if (error instanceof Error) {

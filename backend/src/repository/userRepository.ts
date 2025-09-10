@@ -44,6 +44,17 @@ class userRepository {
     });
     return newUser;
   }
+
+  async usePokeball(userId:number) {
+    const res = await prisma.user.update({
+      where: {id: userId},
+      data: {
+        pokeballs: {
+          decrement: 1
+        }
+      }
+    })
+  }
 }
 
 export default new userRepository();
