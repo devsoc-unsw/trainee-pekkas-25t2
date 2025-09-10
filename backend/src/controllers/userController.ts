@@ -2,9 +2,10 @@ import type { Request, Response } from "express";
 import userService from "../services/userService";
 import dayjs from "dayjs";
 import bcrypt from "bcrypt";
+import { createUserBody, loginUserBody } from "../types/user";
 
 class userController {
-  async createUser(req: Request, res: Response) {
+  async createUser(req: Request<{}, {}, createUserBody, {}>, res: Response) {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
@@ -24,7 +25,7 @@ class userController {
     });
   }
 
-  async loginUser(req: Request, res: Response) {
+  async loginUser(req: Request<{}, {}, loginUserBody, {}>, res: Response) {
     try {
       const { username, password } = req.body;
 
