@@ -1,5 +1,3 @@
-import { TypedRequest, TypedRequestQuery, TypedResponse } from "./requests"
-
 export enum Rarities {
     Common = "common",
     Uncommon = "uncommon",
@@ -8,16 +6,18 @@ export enum Rarities {
     Legendary = "legendary"
 }
 
-export interface createPokemonInstanceType {
+export type createPokemonInstanceType = {
     pokedexNum:number,
     level:number,
     trainerId:number
 }
 
-export interface pokemonIdBody {
+export type pokemonIdBody = {
     pokemonId:number
 }
 
-export interface pokemonRenameBody extends pokemonIdBody {
+export type pokemonRenameBody = {
     newname:string
 }
+
+export type pokemonIdParams = pokemonIdBody
