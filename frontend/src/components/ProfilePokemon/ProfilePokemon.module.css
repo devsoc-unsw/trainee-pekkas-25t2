@@ -1,0 +1,11 @@
+.test {
+	width: 100px;
+	height: 100px;
+	background-color: #E9E9E9;
+	margin: 2rem;
+	border-radius: 20px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

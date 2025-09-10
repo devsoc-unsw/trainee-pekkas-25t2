@@ -1,0 +1,35 @@
+.searchbarWrapper {
+	width: 100vw;
+	height: 4rem;
+}
+
+.searchbar {
+	background-color: gray;
+
+	width: 57.5vw;
+	height: 3rem;
+	margin-left: 5rem;
+
+	margin-top: 1rem;
+
+	border-radius: 10px;
+
+	display: flex;
+	align-items: center;
+}
+
+.searchIcon {
+	width: 2rem;
+
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.searchInput {
+	flex: 1;
+	background: transparent;
+	height: 100%;
+	outline: none;
+	border: none;
+	font-size: 20pt;
+}

@@ -1,12 +1,19 @@
 import classes from "./FriendBox.module.css"
+import anonPfp from "../../assets/anon_pfp.jpg"
 
-function FriendBox() {
+type FriendBoxProps = {
+	name: string;
+	openProfile: () => void;
+}
+
+function FriendBox({ name, openProfile }: FriendBoxProps) {
 	return (
 		<>
-			<div className={classes.friendBox}>
-				<div className={classes.friendIcon}></div>
+			<div className={classes.friendBox} onClick={() => { openProfile() }}>
+				<img src={anonPfp} alt="anon pfp" className={classes.friendIcon} />
+
 				<p className={classes.friendName}>
-					Friend Name
+					{name}
 				</p>
 			</div >
 		</>
