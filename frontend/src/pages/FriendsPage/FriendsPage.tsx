@@ -1,4 +1,5 @@
 import { useState } from "react";
+import classes from "./FriendsPage.module.css"
 import Header from "../../components/Header/Header"
 import FriendList from "../../components/FriendList/FriendList"
 import Navbar from "../../components/Navbar/Navbar"
@@ -17,19 +18,18 @@ function FriendsPage() {
 			{showProfile && <FriendProfile
 				exit={() => setShowProfile(false)}
 				name={selectedFriend} />}
-
-			<AddFriendSearchbar />
-
-			<FriendList
-				openProfile={() => setShowProfile(true)}
-				friendNames={friendNames}
-				onSelectFriend={
-					// get lifted state from friendlist
-					(name) => {
-						setSelectedFriend(name)
-					}}
-			/>
-
+			<div className={classes.wrapper}>
+				<AddFriendSearchbar />
+				<FriendList
+					openProfile={() => setShowProfile(true)}
+					friendNames={friendNames}
+					onSelectFriend={
+						// get lifted state from friendlist (man idk how this works bruh but it just do)
+						(name) => {
+							setSelectedFriend(name)
+						}}
+				/>
+			</div>
 			<Navbar />
 		</>
 	)

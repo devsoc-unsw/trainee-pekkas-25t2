@@ -7,8 +7,7 @@
 
 	overflow-y: scroll;
 
-	/* margin-top: 2.5rem; */
-	margin-left: 5rem;
+	margin-left: 5vh;
 
 	display: flex;
 	flex-direction: column;

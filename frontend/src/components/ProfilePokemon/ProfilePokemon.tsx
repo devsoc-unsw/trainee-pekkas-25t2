@@ -4,7 +4,7 @@ import classes from "./ProfilePokemon.module.css"
 function ProfilePokemon() {
 	return (
 		<>
-			<div className={classes.test}>
+			<div className={classes.imgBox}>
 				<img alt="poke img" />
 			</div>
 		</>

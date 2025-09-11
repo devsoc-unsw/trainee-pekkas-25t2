@@ -1,6 +1,5 @@
 .searchbarWrapper {
 	width: 100vw;
-	height: 4rem;
 }
 
 .searchbar {
@@ -8,9 +7,7 @@
 
 	width: 57.5vw;
 	height: 3rem;
-	margin-left: 5rem;
-
-	margin-top: 1rem;
+	margin-left: 5vh;
 
 	border-radius: 10px;
 
@@ -20,16 +17,19 @@
 
 .searchIcon {
 	width: 2rem;
+	/* height: 2rem; */
 
 	margin-left: 1rem;
 	margin-right: 1rem;
 }
 
 .searchInput {
-	flex: 1;
 	background: transparent;
 	height: 100%;
 	outline: none;
 	border: none;
 	font-size: 20pt;
+
+	/* expands search bar till end */
+	flex: 1;
 }
