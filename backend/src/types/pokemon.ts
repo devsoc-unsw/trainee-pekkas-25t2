@@ -11,3 +11,13 @@ export type createPokemonInstanceType = {
     level:number,
     trainerId:number
 }
+
+export type pokemonIdBody = {
+    pokemonId:number
+}
+
+export type pokemonRenameBody = {
+    newname:string
+}
+
+export type pokemonIdParams = pokemonIdBody

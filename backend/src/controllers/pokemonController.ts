@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import pokemonService from "../services/pokemonService";
 import userService from "../services/userService";
+import { pokemonIdParams, pokemonRenameBody } from "../types/pokemon";
 
 class pokemonController {
     async getRandomPokemon(req:Request, res:Response) {
@@ -15,7 +16,7 @@ class pokemonController {
         }
     }
 
-    async getPokemonById(req:Request, res:Response) {
+    async getPokemonById(req:Request<pokemonIdParams, {}, {}, {}>, res:Response) {
         const { pokemonId } = req.params;
         try {
             console.log(pokemonId);
@@ -46,11 +47,12 @@ class pokemonController {
         }
     }
 
-    async renamePokemon(req:Request, res:Response) {
-        const {pokemonId, newname} = req.body;
-
+    async renamePokemon(req:Request<pokemonIdParams, {}, pokemonRenameBody, {}>, res:Response) {
+        const {newname} = req.body;
+        const {pokemonId} = req.params;
+        console.log(pokemonId);
         try {
-            const retval = await pokemonService.renamePokemon(pokemonId as number, newname as string);
+            const retval = await pokemonService.renamePokemon(Number(pokemonId), newname as string);
             return res.status(200).json(retval);
         } catch (error) {
             if (error instanceof Error) {
