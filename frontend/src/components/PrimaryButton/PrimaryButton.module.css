@@ -7,6 +7,13 @@
     font-size: 1.25rem;
     width: 80%;
     cursor: pointer;
+    border-radius: 0.25rem;
+
+    transition: 
+        background-color 0.3s ease,
+        width 0.1s linear,
+        height 0.3s ease,
+        border-radius 0.3s ease;
 }
 
 @keyframes spin {
@@ -18,7 +25,8 @@
     }
 }
 
-.loading {
+.primaryButton.loading {
+    background-color: transparent;
     margin-top: 1.5rem;
     width: 30px;
     height: 30px;

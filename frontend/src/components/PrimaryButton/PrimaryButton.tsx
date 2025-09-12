@@ -10,17 +10,14 @@ type PrimaryButtonProps = {
 }
 
 function PrimaryButton({ type, onClick, disabled, loading, children }: PrimaryButtonProps) {
-  if (loading)
-    return <div className={styles.loading}/>
-  
   return (
     <button 
       type={type ?? "button"}
       onClick={onClick}
       disabled={disabled ?? false}
-      className={styles.primaryButton}
+      className={`${styles.primaryButton} ${loading ? styles.loading : ''}`}
     >
-      {children}
+      {!loading && children}
     </button>
   )
 }
