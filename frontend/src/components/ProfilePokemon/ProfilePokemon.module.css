@@ -1,0 +1,12 @@
+.imgBox {
+	width: 100px;
+	height: 100px;
+	background-color: #E9E9E9;
+	border-radius: 20px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	margin: 2vh;
+}

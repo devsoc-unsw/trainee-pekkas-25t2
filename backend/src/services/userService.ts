@@ -23,6 +23,16 @@ class userService {
     const res = await userRepository.getUserByUsername(username);
     return res;
   }
+
+  async getUserById(userId:number) {
+    const res = await userRepository.getUserById(userId);
+    return res;
+  }
+
+  async decrementUserPokeballs(userId:number) {
+    const res = await userRepository.usePokeball(userId)
+    return res;
+  }
 }
 
 export default new userService();

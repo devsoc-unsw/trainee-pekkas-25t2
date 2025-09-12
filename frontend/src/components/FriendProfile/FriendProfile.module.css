@@ -1,0 +1,118 @@
+.profileBox {
+	/* background image */
+	background-image: url("../../assets/friend_profile_bg.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	width: 65vw;
+	height: 65vh;
+
+	/* Make it sit above everything else */
+	position: fixed;
+	z-index: 9999;
+
+	/* Posn @ center */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	flex-direction: column;
+
+	border-radius: 10px;
+}
+
+.exitButtonWrapper {
+	width: 100%;
+	/* height: 40px; */
+	height: 5vh;
+
+	display: flex;
+	justify-content: right;
+	align-items: center;
+}
+
+.exitButton {
+	width: 30px;
+	height: 30px;
+	margin-right: 7px;
+
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 20pt;
+}
+
+.nameWrapper {
+	width: 100%;
+	height: 8vh;
+
+	display: flex;
+	align-items: center;
+
+	background-color: #767676;
+	background-color: rgba(118, 118, 118, 0.8);
+}
+
+.name {
+	font-size: 40pt;
+	margin: 0;
+	padding-bottom: 12px;
+	margin-left: 5%;
+}
+
+.bodyWrapper {
+	display: flex;
+}
+
+.userSection {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 52vh;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.pfp {
+	border-radius: 100%;
+	width: 150px;
+	margin-bottom: 5vh;
+}
+
+.addFriendButton {
+	background-color: #F0DDDD;
+
+	width: 200px;
+	height: 40px;
+
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20pt;
+	border-radius: 10px;
+
+	transition: transform 0.1s ease;
+}
+
+.addFriendButton:hover {
+	transform: scale(1.05)
+}
+
+.pokeSection {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+}
+
+.pokeSectionRow {
+	display: flex;
+}

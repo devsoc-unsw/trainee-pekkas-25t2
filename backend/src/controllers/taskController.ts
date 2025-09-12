@@ -4,7 +4,7 @@ import { CreateTaskRequestBody, DeleteTaskRequestParams, UpdateTaskRequestBody, 
 
 class taskController {
   async getTasks(
-    req: Request<{}, {}, {}, {}>, 
+    req: Request<{}, {}, {}, {}>,
     res: Response
   ) {
     // this is already validated in middleware so should be safe to typecast

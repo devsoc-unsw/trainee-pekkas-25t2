@@ -4,9 +4,14 @@ import FormInput from '../FormInput/FormInput'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import styles from "./RegisterCard.module.css"
 import { useNavigate } from 'react-router'
+import axios from 'axios'
+import WarnIcon from '../../assets/warning-circle.svg'
+import { API_URL } from '../../utils/constants'
 
 function RegisterCard() {
   const navigate = useNavigate()
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const [email, setEmail] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
@@ -15,27 +20,45 @@ function RegisterCard() {
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // error handling
     if (!email) {
       setIsError(true)
       setErrorMessage("Email cannot be empty")
+      return
     } else if (!username) {
       setIsError(true)
       setErrorMessage("Username cannot be empty")
+      return
     } else if (!password) {
       setIsError(true)
       setErrorMessage("Password cannot be empty")
+      return
     } else if (!confirmPassword) {
       setIsError(true)
       setErrorMessage("Please confirm password")
+      return
     } else if (password !== confirmPassword) {
       setIsError(true)
       setErrorMessage("Passwords do not match")
+      return
     }
-    // temp
-    console.log("Registering user...")
+
+    setIsLoading(true)
+    try {
+      await axios.post(`${API_URL}/user/createUser`, { username, email, password }, {withCredentials: true});
+      navigate("/todo")
+    } catch (error) {
+      setIsError(true);
+
+      if (axios.isAxiosError(error) && error.response) {
+        setErrorMessage(error.response.data.error)
+      } else {
+        setErrorMessage((error as Error)?.message);
+      }
+    }
+    setIsLoading(false)
   }
 
   const onClickHandler = (e: React.MouseEvent) => {
@@ -72,9 +95,14 @@ function RegisterCard() {
           placeHolder="Confirm Password"
         />
         <div className="center-row">
-          <PrimaryButton type="submit">Sign Up</PrimaryButton>
+          <PrimaryButton type="submit" onClick={() => setIsError(false)}  loading={isLoading}>Sign Up</PrimaryButton>
         </div>
-        {isError && (<div className={`${styles.errorMessage} center-row`}>{errorMessage}</div>)}
+        {isError && (
+          <div className={`${styles.errorMessage} center-row`}>
+            <img src={WarnIcon} alt="warning icon" />
+            {errorMessage}
+          </div>
+        )}
       </form>
       <div className="center-row">
         <p>Already have an account? <a href="" onClick={(e) => onClickHandler(e)}>Log in</a></p>

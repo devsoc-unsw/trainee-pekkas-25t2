@@ -4,30 +4,47 @@ import FormInput from '../FormInput/FormInput';
 import Card from '../Card/Card';
 import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+import WarnIcon from '../../assets/warning-circle.svg'
+import { API_URL } from '../../utils/constants';
 
 function LoginCard() {
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const [username, setUsername] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // error handling
     if (!username) {
       setIsError(true)
       setErrorMessage("Username cannot be empty")
+      return
     } else if (!password) {
       setIsError(true)
       setErrorMessage("Password cannot be empty")
+      return
     }
 
-    // temp stuff... make req to backend auth here
-    console.log("Logging in...")
-    console.log(`username is: ${username}`)
-    console.log(`password is: ${password}`)
+    setIsLoading(true)
+    try {
+      await axios.post(`${API_URL}/user/login`, { username, password }, {withCredentials: true});
+      navigate("/todo")
+    } catch (error) {
+      setIsError(true);
+
+      if (axios.isAxiosError(error) && error.response) {
+        setErrorMessage(error.response.data.error)
+      } else {
+        setErrorMessage((error as Error)?.message);
+      }
+    }
+    setIsLoading(false)
   }
 
     const onClickHandler = (e: React.MouseEvent) => {
@@ -54,9 +71,14 @@ function LoginCard() {
           placeHolder="Password"
         />
         <div className="center-row">
-          <PrimaryButton type="submit">Log In</PrimaryButton>
+          <PrimaryButton loading={isLoading} type="submit" onClick={() => setIsError(false)}>Log In</PrimaryButton>
         </div>
-        {isError && (<div className={`${styles.errorMessage} center-row`}>{errorMessage}</div>)}
+        {isError && (
+          <div className={`${styles.errorMessage} center-row`}>
+            <img src={WarnIcon} alt="warning icon" />
+            {errorMessage}
+          </div>
+        )}
       </form>
       <div className="center-row">
         <p>Don't have an account? <a href="" onClick={(e) => onClickHandler(e)}>Register Here</a></p>
