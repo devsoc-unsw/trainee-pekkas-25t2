@@ -20,7 +20,7 @@ function LandingPage() {
         </div>
         <div className={classes.subtitle}>
           <p>
-            Gamifying productivity... now with Pokemon™!
+            Gamifying productivity... now with <span className={classes.trademark}>Pokemon<span>TM</span></span>!
           </p>
         </div>
         <div className={classes.startButtonWrapper}>

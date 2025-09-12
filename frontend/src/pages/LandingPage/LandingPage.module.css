@@ -50,4 +50,15 @@
 
 .startButton:hover {
 	transform: scale(1.05);
+	background-color: #477d8b;
+}
+
+.trademark {
+	position: relative;
+	margin-right: 1.25rem;
+}
+
+.trademark span {
+	position: absolute;
+	font-size: 1rem;
 }

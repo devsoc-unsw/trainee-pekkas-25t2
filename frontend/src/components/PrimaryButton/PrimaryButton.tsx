@@ -4,23 +4,19 @@ import styles from "./PrimaryButton.module.css"
 type PrimaryButtonProps = {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
-  disabled?: boolean;
   children?: React.ReactNode;
   loading?: boolean
 }
 
-function PrimaryButton({ type, onClick, disabled, loading, children }: PrimaryButtonProps) {
-  if (loading)
-    return <div className={styles.loading}/>
-  
+function PrimaryButton({ type, onClick, loading, children }: PrimaryButtonProps) {
   return (
     <button 
       type={type ?? "button"}
       onClick={onClick}
-      disabled={disabled ?? false}
-      className={styles.primaryButton}
+      disabled={loading ? true : false}
+      className={`${styles.primaryButton} ${loading ? styles.loading : ''}`}
     >
-      {children}
+      {!loading && children}
     </button>
   )
 }
