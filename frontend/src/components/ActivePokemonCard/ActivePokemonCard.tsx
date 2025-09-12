@@ -39,29 +39,33 @@ function ActivePokemonCard() {
   const [refresh, setRefresh] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [data, setData] = useState<PokemonData | null>(null)
   const [isEditing, setIsEditing] = useState<boolean>(false)
-  const [nickname, setNickname] = useState<string>(
-    data
-      ? data.nickname ?? data.species.species_name 
-      : ''
-  )
-  const [newNickname, setNewNickname] = useState<string>(
-    data
-      ? data.nickname ?? data.species.species_name 
-      : ''
-  )
-
   const [active, setActive] = useState(false)
 
+  // pokemon stats
+  const [data, setData] = useState<PokemonData | null>(null)
+  const [nickname, setNickname] = useState<string>('')
+  const [newNickname, setNewNickname] = useState<string>('')
+
+  // refresh when swapping pokemons
   useEffect(() => {
     const fetchActivePokemon = async () => {
+      setIsLoading(true);
       const response = await axios.get(`${API_URL}/pokemon/active`, {withCredentials: true});
       setData(response.data as PokemonData);
+      setIsLoading(false);
     };
 
-    fetchActivePokemon().then(() => setIsLoading(false));
+    fetchActivePokemon();
   }, [refresh]);
+
+  useEffect(() => {
+    if (data) {
+      const name = data.nickname ?? data.species.species_name;
+      setNickname(name);
+      setNewNickname(name);
+    }
+  }, [data]);
 
   const levelUpPokemon = () => {
     // make req to backend and update data
@@ -78,13 +82,20 @@ function ActivePokemonCard() {
     setNewNickname(nickname)
   }
 
-  const changeNickname = () => {
+  const changeNickname = async () => {
     setIsEditing(false)
     setNickname(newNickname)
 
     // only request name change if name actually changed
+    if (!data)
+      return
+
     if (nickname !== newNickname) {
-      console.log(`send req to backend to change nickname from ${nickname} to ${newNickname}`)
+      await axios.post(
+        `${API_URL}/pokemon/instance/${data.id}/rename`,
+        {newname: newNickname},
+        {withCredentials: true}
+      )
     }
   }
 
@@ -128,7 +139,7 @@ function ActivePokemonCard() {
       </div>
       <div className={styles.pokemonContainer}>
         <div className={`${styles.pokemonProfileContainer} ${active ? styles.active : ''}`}>
-          <img src={data.species.icon} alt={`image of ${data.nickname}`} className={styles.pokemonIcon} />
+          <img src={data.species.icon} alt={`image of ${nickname}`} className={styles.pokemonIcon} />
         </div>
         <div
           className={`${styles.pokemonLevelContainer} ${active ? `${styles.active}` : ''}`}
