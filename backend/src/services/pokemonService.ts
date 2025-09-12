@@ -96,7 +96,7 @@ class pokemonService {
     }
 
     async getUserActivePokemon(userId:number) {
-        return await pokemonRepository.getUserActivePokemon(userId);
+        return await pokemonRepository.getUserActivePokemon(userId) ?? {};
     }
 
     async setActivePokemon(userId: number, pokemonId: number) {
