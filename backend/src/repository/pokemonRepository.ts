@@ -132,13 +132,12 @@ class pokemonRepository {
     }
 
     async setUserActivePokemon(userId: number, pokemonId: number) {
-        const res = await prisma.activePokemon.update({
-        where: { userId },
-        data: { pokemonId },
-        select: {
-            pokemon: true
-        }
-        })
+        const res = await prisma.activePokemon.upsert({
+            where: { userId },
+            update: { pokemonId }, 
+            create: { userId, pokemonId }, 
+            include: { pokemon: true },
+        });
 
         return res.pokemon
     }
