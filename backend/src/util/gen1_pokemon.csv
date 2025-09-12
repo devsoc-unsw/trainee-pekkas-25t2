@@ -58,7 +58,7 @@ pokedex_number,primary_type,secondary_type,level_to_evolve,evolves_from_id,icon,
 57,fighting,,28,56,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/57.png,primeape,false,
 58,fire,,,,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/58.png,growlithe,true,uncommon
 59,fire,,32,58,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png,arcanine,false,
-60,water,,,,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png,poliwag,true,
+60,water,,,,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png,poliwag,true,common
 61,water,,25,60,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png,poliwhirl,false,
 62,water,fighting,38,61,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/62.png,poliwrath,false,
 63,psychic,,,,https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/63.png,abra,true,uncommon
