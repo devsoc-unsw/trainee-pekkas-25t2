@@ -124,7 +124,11 @@ class pokemonRepository {
         const res = await prisma.activePokemon.findFirst({
             where: { userId },
             select: { 
-                pokemon: true
+                pokemon: {
+                    include: {
+                        species: true
+                    }
+                }
             }
         })
 
@@ -136,7 +140,13 @@ class pokemonRepository {
             where: { userId },
             update: { pokemonId }, 
             create: { userId, pokemonId }, 
-            include: { pokemon: true },
+            select: { 
+                pokemon: {
+                    include: {
+                        species: true
+                    }
+                }
+            }
         });
 
         return res.pokemon
