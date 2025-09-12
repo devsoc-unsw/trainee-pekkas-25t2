@@ -6,31 +6,62 @@ import PokemonElementTag from '../PokemonElementTag/PokemonElementTag'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import { useEffect, useState } from 'react'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
+import axios from 'axios'
+import { API_URL } from '../../utils/constants'
+import PokemonListModal from '../PokemonListModal/PokemonListModal'
 
-type pokemonData = {
+type PokemonData = {
+  id: number,
+  trainerId: number,
   level: number,
   exp_lvl: number,
-  nickname: string,
-  icon: string
-  type: string[]
-}
+  nickname: string | null,
+  species: {
+    pokedex_number: number,
+    species_name: string,
+    primary_type: string,
+    secondary_type: string | null,
+    level_to_evolve: number | null,
+    evolves_from_id: number | null,
+    icon: string,
+    base_pokemon: boolean,
+    rarity: string
+  }
+} | null;
 
-type ActivePokemonCardProps = {
-  pokemonData: pokemonData
-  // more props if needed...
-}
 
-function ActivePokemonCard({ pokemonData }: ActivePokemonCardProps) {
-  const [data, setData] = useState(pokemonData)
+// type ActivePokemonCardProps = {
+//   pokemonData: pokemonData
+//   // more props if needed...
+// }
+
+function ActivePokemonCard() {
+  const [refresh, setRefresh] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState<PokemonData | null>(null)
   const [isEditing, setIsEditing] = useState<boolean>(false)
-  const [nickname, setNickname] = useState<string>(data.nickname)
-  const [newNickname, setNewNickname] = useState<string>(data.nickname)
+  const [nickname, setNickname] = useState<string>(
+    data
+      ? data.nickname ?? data.species.species_name 
+      : ''
+  )
+  const [newNickname, setNewNickname] = useState<string>(
+    data
+      ? data.nickname ?? data.species.species_name 
+      : ''
+  )
 
   const [active, setActive] = useState(false)
 
   useEffect(() => {
-    setData(pokemonData)
-  }, [pokemonData])
+    const fetchActivePokemon = async () => {
+      const response = await axios.get(`${API_URL}/pokemon/active`, {withCredentials: true});
+      setData(response.data as PokemonData);
+    };
+
+    fetchActivePokemon().then(() => setIsLoading(false));
+  }, [refresh]);
 
   const levelUpPokemon = () => {
     // make req to backend and update data
@@ -57,16 +88,47 @@ function ActivePokemonCard({ pokemonData }: ActivePokemonCardProps) {
     }
   }
 
+  const onSwap = () => {
+    setShowModal(false)
+    setRefresh(prev => !prev)
+  }
+
+
+  if (!data) {
+    if (isLoading) {
+      return (
+        <Card className={`${styles.pokemonCard} center-row center-col`}>
+          <div className={`${styles.loading}`}/>
+        </Card>
+      )
+    } else {
+      return (
+        <Card className={`${styles.pokemonCard} center-row center-col`}>
+          You currently do not have an active pokemon.
+          <PrimaryButton onClick={() => setShowModal(prev => !prev)}>
+            Set an active pokemon
+          </PrimaryButton>
+          {showModal && <PokemonListModal onSwap={onSwap}/>}
+        </Card>
+      )
+    }
+  }
+
   return (
     <Card className={styles.pokemonCard}>
       <div className={styles.swapButtonContainer}>
         <button type="button" className={styles.swapButton}>
-          <img src={SwapIcon} alt="swap icon" className={styles.swapButtonIcon} />
+          <img 
+            src={SwapIcon}
+            alt="swap icon"
+            className={styles.swapButtonIcon}
+            onClick={() => setShowModal(prev => !prev)}
+          />
         </button>
       </div>
       <div className={styles.pokemonContainer}>
         <div className={`${styles.pokemonProfileContainer} ${active ? styles.active : ''}`}>
-          <img src={data.icon} alt={`image of ${data.nickname}`} className={styles.pokemonIcon} />
+          <img src={data.species.icon} alt={`image of ${data.nickname}`} className={styles.pokemonIcon} />
         </div>
         <div
           className={`${styles.pokemonLevelContainer} ${active ? `${styles.active}` : ''}`}
@@ -110,13 +172,17 @@ function ActivePokemonCard({ pokemonData }: ActivePokemonCardProps) {
       </div>
       <div className={styles.divider}/>
       <div className={styles.elementsContainer}>
-        {data.type.map((t) => <PokemonElementTag element={t}/>)}
+        {[data.species.primary_type, data.species.secondary_type].map((t) => {
+          if (t)
+            return <PokemonElementTag element={t}/>
+        })}
       </div>
       <span>XP: <span className={`${styles.xpCounter} ${active ? styles.active : ''}`}>{data.exp_lvl}/100</span></span>
       <ProgressBar percentFilled={Math.min(data.exp_lvl, 100)}/>
       <div className='center-row'>
         {(data.exp_lvl >= 100) && <PrimaryButton onClick={levelUpPokemon}>Level Up</PrimaryButton>}
       </div>
+      {showModal && <PokemonListModal onSwap={onSwap}/>}
     </Card>
   )
 }

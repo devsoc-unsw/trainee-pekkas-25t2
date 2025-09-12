@@ -1,0 +1,23 @@
+.modalContainer {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 12rem;
+    left: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    gap: 2rem;
+}
+
+.pokemonContainer {
+    height: 96px;
+    width: auto;
+    border: 1px solid white;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.pokemonContainer:hover {
+    background-color: #e7e7e7;
+}
