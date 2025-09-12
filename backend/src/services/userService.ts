@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import userRepository from "../repository/userRepository";
+import pokemonRepository from "../repository/pokemonRepository";
 class userService {
   async registerUser(username: string, email: string, password: string) {
     const results = await userRepository.getUserByUsernameOrEmail(username, email);
@@ -32,6 +33,15 @@ class userService {
   async decrementUserPokeballs(userId:number) {
     const res = await userRepository.usePokeball(userId)
     return res;
+  }
+
+  async setActivePokemon(userId: number, pokemonId: number) {
+    const pokemon = await pokemonRepository.getPokemonInstanceById(pokemonId)
+
+    if (!pokemon)
+      throw new Error("Invalid pokemon")
+
+    return await userRepository.setUserActivePokemon(userId, pokemonId)
   }
 }
 

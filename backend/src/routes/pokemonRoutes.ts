@@ -10,5 +10,6 @@ router.get("/owned", pokemonController.getUserPokemon);
 router.get("/instance/:pokemonId", pokemonController.getPokemonById);
 router.post("/instance/:pokemonId/rename", pokemonController.renamePokemon);
 router.post("/catch", pokemonController.catchPokemon);
+router.post("/levelup/:pokemonId", pokemonController.levelUpPokemon);
 
 export default router;

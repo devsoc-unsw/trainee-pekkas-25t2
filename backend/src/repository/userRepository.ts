@@ -55,6 +55,33 @@ class userRepository {
       }
     })
   }
+
+  async getUserActivePokemon(userId: number) {
+    const user = await prisma.user.findFirst({
+      where: { id: userId },
+      select: {
+        activeSlot: {
+          include: {
+            pokemon: true
+          }
+        }
+      }
+    });
+
+    return user?.activeSlot?.pokemon;
+  }
+
+  async setUserActivePokemon(userId: number, pokemonId: number) {
+    const res = await prisma.activePokemon.update({
+      where: { userId },
+      data: { pokemonId },
+      select: {
+        pokemon: true
+      }
+    })
+
+    return res.pokemon
+  }
 }
 
 export default new userRepository();

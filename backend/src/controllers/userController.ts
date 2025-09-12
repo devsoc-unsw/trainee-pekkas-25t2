@@ -60,6 +60,23 @@ class userController {
       return res.status(500).json({ error: "Error logging in" });
     }
   }
+
+  async setUserActivePokemon(req: Request, res: Response) {
+    // this is already validated in middleware so should be safe to typecast
+    const userId = req.session.userId as number
+    const { pokemonId } = req.body
+
+    try {
+      const tasks = await userService.setActivePokemon(userId, Number(pokemonId));
+      return res.status(200).json(tasks)
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      }
+
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  }
 }
 
 export default new userController();

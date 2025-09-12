@@ -84,6 +84,20 @@ class pokemonController {
             return res.status(500).json({error: "Internal Server Error"});
         }
     }
+
+    async levelUpPokemon(req:Request<pokemonIdParams, {}, pokemonRenameBody, {}>, res:Response) {
+        const {pokemonId} = req.params;
+
+        try {
+            const updatedPokemon = await pokemonService.levelUpPokemon(Number(pokemonId))
+            return res.status(200).json(updatedPokemon);
+        } catch (error) {
+            if (error instanceof Error) {
+                return res.status(400).json({error: error.message});
+            }
+            return res.status(500).json({error: "Internal Server Error"});
+        }
+    }
 }
 
 export default new pokemonController();

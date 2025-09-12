@@ -82,6 +82,43 @@ class pokemonRepository {
 
         return res;
     }
+
+    async addPokemonExp(pokemonId: number, exp: number) {
+        await prisma.pokemonInstance.update({
+            where: { id: pokemonId },
+            data: {
+                exp_lvl: {
+                    increment: exp
+                }
+            }
+        })
+    }
+
+    async levelUpPokemon(pokemonId: number) {
+        await prisma.pokemonInstance.update({
+            where: { id: pokemonId },
+            data: {
+                level: {
+                    increment: 1
+                }
+            }
+        })
+    }
+
+    async getPokemonSpeciesById(pokemonId: number) {
+        const res = await prisma.pokemonInstance.findFirst({
+            where: { id: pokemonId },
+            select: {
+                species: {
+                    include: {
+                        evolves_into: true
+                    }
+                }
+            }
+        })
+
+        return res?.species;
+    }
 }
 
 export default new pokemonRepository();

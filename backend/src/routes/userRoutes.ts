@@ -5,4 +5,5 @@ const router = express.Router();
 
 router.post("/createUser", userController.createUser);
 router.post("/login", userController.loginUser);
+router.post("/set-active-pokemon", userController.setUserActivePokemon);
 export default router;
