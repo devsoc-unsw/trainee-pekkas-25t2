@@ -96,7 +96,12 @@ class pokemonService {
     }
 
     async getUserActivePokemon(userId:number) {
-        return await pokemonRepository.getUserActivePokemon(userId) ?? {};
+        const res = pokemonRepository.getUserActivePokemon(userId);
+
+        if (!res)
+            throw new Error("User does not have an active pokemon")
+
+        return res
     }
 
     async setActivePokemon(userId: number, pokemonId: number) {
