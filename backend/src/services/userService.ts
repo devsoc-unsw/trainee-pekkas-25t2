@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import userRepository from "../repository/userRepository";
+import pokemonRepository from "../repository/pokemonRepository";
 class userService {
   async registerUser(username: string, email: string, password: string) {
     const results = await userRepository.getUserByUsernameOrEmail(username, email);

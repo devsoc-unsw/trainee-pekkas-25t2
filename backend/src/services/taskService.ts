@@ -1,4 +1,6 @@
+import pokemonRepository from "../repository/pokemonRepository"
 import taskRepository from "../repository/taskRepository"
+import userRepository from "../repository/userRepository"
 
 class taskService {
   async getTasks(userId: number) {
@@ -32,9 +34,18 @@ class taskService {
     if (description === undefined && complete === undefined && dueDate === undefined)
       throw new Error("No values specified to update")
 
-    // TODO: update exp of user's active pokemon
     if (complete !== undefined) {
-      console.log("update user's active pokemon here...")
+      const activePokemon = await userRepository.getUserActivePokemon(userId)
+      console.log(activePokemon)
+
+      if (activePokemon) {
+        const XP = 5
+        
+        pokemonRepository.addPokemonExp(
+          activePokemon.id, 
+          complete ? XP : -XP
+        )
+      }
     }
 
     const updatedTask = await taskRepository.updateTask(taskId, {
