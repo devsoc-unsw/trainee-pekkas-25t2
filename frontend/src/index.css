@@ -3,6 +3,11 @@
   src: url('./assets/MunroSmall.ttf');
 }
 
+@font-face {
+  font-family: 'LowerPixel';
+  src: url('./assets/LowresPixel-Regular.otf');
+}
+
 html, body {
   font-size: 16px;
   margin: 0;
@@ -15,5 +20,6 @@ html, body {
 }
 
 input {
-  font-family: sans-serif;
+  font-family: 'LowerPixel';
+  letter-spacing: 0.5px;
 }
