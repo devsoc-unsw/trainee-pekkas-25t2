@@ -34,7 +34,10 @@ class pokemonRepository {
 
     async getPokemonInstancesByUser(userId:number) {
         const res = await prisma.pokemonInstance.findMany({
-            where: {trainerId: userId}
+            where: {trainerId: userId},
+            include: {
+                species: true
+            }
         })
 
         return res;
