@@ -30,6 +30,7 @@ type PokemonListModalProps = {
 
 function PokemonListModal({ onSwap }: PokemonListModalProps) {
   const [data, setData] = useState<Pokemons | null>(null)
+  const [isFetching, setIsFetching] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -42,10 +43,19 @@ function PokemonListModal({ onSwap }: PokemonListModalProps) {
   }, []);
 
   if (!data) {
+    if (isFetching) {
+      return (
+        <Card className={styles.modalContainer}>
+          <div className={styles.spinner}/>
+          {"Fetching your pokemons..."}
+        </Card>
+      )
+    }
+
     return (
       <Card className={styles.modalContainer}>
-          {"You currently have no pokemons... :("}
-        </Card>
+        {"You currently have no pokemons. Open some packs!"}
+      </Card>
     )
   }
 
