@@ -119,6 +119,29 @@ class pokemonRepository {
 
         return res?.species;
     }
+
+    async getUserActivePokemon(userId: number) {
+        const res = await prisma.activePokemon.findFirst({
+            where: { userId },
+            select: { 
+                pokemon: true
+            }
+        })
+
+        return res?.pokemon
+    }
+
+    async setUserActivePokemon(userId: number, pokemonId: number) {
+        const res = await prisma.activePokemon.update({
+        where: { userId },
+        data: { pokemonId },
+        select: {
+            pokemon: true
+        }
+        })
+
+        return res.pokemon
+    }
 }
 
 export default new pokemonRepository();

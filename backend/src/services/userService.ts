@@ -34,15 +34,6 @@ class userService {
     const res = await userRepository.usePokeball(userId)
     return res;
   }
-
-  async setActivePokemon(userId: number, pokemonId: number) {
-    const pokemon = await pokemonRepository.getPokemonInstanceById(pokemonId)
-
-    if (!pokemon)
-      throw new Error("Invalid pokemon")
-
-    return await userRepository.setUserActivePokemon(userId, pokemonId)
-  }
 }
 
 export default new userService();

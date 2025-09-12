@@ -7,6 +7,8 @@ const router = express.Router();
 router.get("/random", pokemonController.getRandomPokemon);
 //get all a users pokemon
 router.get("/owned", pokemonController.getUserPokemon);
+router.get("/active", pokemonController.getUserActivePokemon);
+router.post("/active", pokemonController.setUserActivePokemon);
 router.get("/instance/:pokemonId", pokemonController.getPokemonById);
 router.post("/instance/:pokemonId/rename", pokemonController.renamePokemon);
 router.post("/catch", pokemonController.catchPokemon);

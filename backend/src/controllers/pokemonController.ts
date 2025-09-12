@@ -98,6 +98,37 @@ class pokemonController {
             return res.status(500).json({error: "Internal Server Error"});
         }
     }
+
+    async getUserActivePokemon(req:Request, res:Response) {
+        const userId = req.session.userId as number
+
+        try {
+            const userPokemon = await pokemonService.getUserActivePokemon(userId);
+            return res.status(200).json(userPokemon);
+        } catch (error) {
+            if (error instanceof Error) {
+                return res.status(400).json({error: error.message});
+            }
+            return res.status(500).json({error: "Internal Server Error"});
+        }
+    }
+
+    async setUserActivePokemon(req: Request, res: Response) {
+        const userId = req.session.userId as number
+        const { pokemonId } = req.body
+
+        try {
+        const tasks = await pokemonService.setActivePokemon(userId, Number(pokemonId));
+        return res.status(200).json(tasks)
+        } catch (error) {
+        if (error instanceof Error) {
+            return res.status(400).json({ error: error.message });
+        }
+
+        return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
 }
 
 export default new pokemonController();

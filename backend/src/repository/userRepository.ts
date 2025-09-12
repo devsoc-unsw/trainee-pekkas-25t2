@@ -70,18 +70,6 @@ class userRepository {
 
     return user?.activeSlot?.pokemon;
   }
-
-  async setUserActivePokemon(userId: number, pokemonId: number) {
-    const res = await prisma.activePokemon.update({
-      where: { userId },
-      data: { pokemonId },
-      select: {
-        pokemon: true
-      }
-    })
-
-    return res.pokemon
-  }
 }
 
 export default new userRepository();

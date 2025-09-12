@@ -94,6 +94,19 @@ class pokemonService {
 
         return await pokemonRepository.getPokemonInstanceById(pokemonId)
     }
+
+    async getUserActivePokemon(userId:number) {
+        return await pokemonRepository.getUserActivePokemon(userId);
+    }
+
+    async setActivePokemon(userId: number, pokemonId: number) {
+        const pokemon = await pokemonRepository.getPokemonInstanceById(pokemonId)
+
+        if (!pokemon)
+        throw new Error("Invalid pokemon")
+
+        return await pokemonRepository.setUserActivePokemon(userId, pokemonId)
+    }
 }
 
 export default new pokemonService();
