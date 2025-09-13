@@ -70,6 +70,7 @@ class userRepository {
 
     return user?.activeSlot?.pokemon;
   }
+
 }
 
 export default new userRepository();
