@@ -8,6 +8,7 @@ import AddFriendSearchbar from "../../components/AddFriendSearchbar/AddFriendSea
 import axios from 'axios';
 import { API_URL } from '../../utils/constants';
 import type { UserProfileProps } from "../../utils/types";
+import FriendPokemonPreview from "../../components/FriendPokemonPreview/FriendPokemonPreview";
 
 function FriendsPage() {
 	const [showProfile, setShowProfile] = useState(false);
@@ -26,7 +27,7 @@ function FriendsPage() {
 			console.log(res.data);
 			setSelectedFriend(res.data);
 			setShowProfile(true);
-		} catch (err:any) {
+		} catch (err) {
 			console.error(err);
 			alert("error! please check the console!");
 		}
@@ -38,16 +39,19 @@ function FriendsPage() {
 				exit={() => setShowProfile(false)}
 				name={selectedFriend?.username} />}
 			<div className={classes.wrapper}>
-				<AddFriendSearchbar onSearch={handleSearch}/>
-				<FriendList
-					openProfile={() => setShowProfile(true)}
-					friendNames={friendNames}
-					onSelectFriend={
-						// get lifted state from friendlist (man idk how this works bruh but it just do)
-						(name) => {
-							setSelectedFriendName(name)
-						}}
-				/>
+				<div className={classes.left}>
+					<AddFriendSearchbar onSearch={handleSearch}/>
+					<FriendList
+						openProfile={() => setShowProfile(true)}
+						friendNames={friendNames}
+						onSelectFriend={
+							// get lifted state from friendlist (man idk how this works bruh but it just do)
+							(name) => {
+								setSelectedFriendName(name)
+							}}
+					/>
+				</div>
+				<FriendPokemonPreview icon={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"} nickname={"Joe Jr."} level={5} username={"joe"} species={"bulbasaur"}/>
 			</div>
 			<Navbar />
 		</>

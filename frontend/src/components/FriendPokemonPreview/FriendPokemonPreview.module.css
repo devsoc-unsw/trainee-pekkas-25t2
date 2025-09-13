@@ -1,0 +1,86 @@
+.textWrapper {
+    height: 100%;
+    width: 40vw;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.text {
+    font-size: 24px;
+}
+
+/* pokemon avatar */
+.pokemonCard {
+    border: 1px solid #b1b1b1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 17.5rem;
+    height: 80%;
+    justify-content: center;
+}
+
+.pokemonContainer {
+    position: relative;
+    height: 12rem;
+    width: 12rem;
+    margin: auto;
+}
+
+.pokemonProfileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 100%;
+    padding: 1rem;
+    aspect-ratio: 1/1;
+    margin: auto;
+    transition: box-shadow 0.3s ease-in
+}
+
+.pokemonIcon {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+}
+
+.pokemonLevelContainer {
+    font-size: 1.15rem;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #0fa1a8;
+    opacity: 70%;
+    border-radius: 100%;
+    height: 3.25rem;
+    width: 3.25rem;
+    transition: all 0.3s ease-in
+}
+
+/* pokemon name */
+.pokemonNameContainer {
+    position: relative;
+}
+
+.pokemonName {
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+.trainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.trainertext{
+    font-size: 20px;
+}
