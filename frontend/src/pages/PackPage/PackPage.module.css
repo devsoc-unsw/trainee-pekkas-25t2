@@ -31,3 +31,9 @@
   width: 100px;
   height: 100px;
 }
+
+.cooldown {
+  display: flex;
+  justify-content: center;
+  color: crimson;
+}

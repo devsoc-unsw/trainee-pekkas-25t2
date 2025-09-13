@@ -1,13 +1,14 @@
 import Header from "../../components/Header/Header"
 import Navbar from "../../components/Navbar/Navbar"
 import classes from "./PackPage.module.css"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router"
 import { pokemonData } from "../../pokemonData"
 
 function PackPage() {
   const [claimed, setClaimed] = useState(false)
   const [reward, setReward] = useState<any | null>(null)
+  const [cooldown, setCooldown] = useState<number>(0)
 
   const rarityWeights = {
     common: 60,
@@ -17,6 +18,7 @@ function PackPage() {
     legendary: 1
   }
   
+  // Randomly selects a rarity based on the above percentages
   const chooseRarity = () => {
     const num = Math.floor(Math.random() * 100) + 1;
     console.log(num)
@@ -37,7 +39,10 @@ function PackPage() {
 
   // Function to claim a Pokémon
   const claimPack = () => {
-    if (claimed) return
+    // if (claimed) return
+    if (cooldown > 0) {
+      return;
+    }
 
     const chosenRarity = chooseRarity()
     const filtered = pokemonData.filter(
@@ -51,7 +56,20 @@ function PackPage() {
 
     setReward(chosen)
     setClaimed(true)
+    setCooldown(10)
   }
+
+  // Starts a timer after claiming a pack
+  useEffect(() => {
+    if (cooldown <= 0) {
+      return
+    }
+    const timer = setTimeout(() => {
+      setCooldown((prev) => prev - 1)
+    }, 1000)
+
+    return () => clearTimeout(timer)
+  }, [cooldown])
 
   return (
     <>
@@ -61,18 +79,21 @@ function PackPage() {
       <div className={classes.title}>
         CLAIM YOUR DAILY PACK
       </div>
-      {!claimed ? (
+      {cooldown > 0 ? (
+        <div className={classes.cooldown}>
+          <h3>Next pack available in {cooldown} seconds...</h3>
+        </div>
+      ) : (
         <button onClick={claimPack} className={classes.claimBtn}>
           Open Pack
         </button>
-      ) : (
-        reward && (
-          <div className={classes.reward}>
-            <h2>You got {reward.species_name}!</h2>
-            <img src={reward.icon} alt={reward.species_name} />
-            <p>Rarity: {reward.rarity}</p>
-          </div>
-        )
+      )}
+      {claimed && reward && (
+        <div className={classes.reward}>
+          <h2>You got {reward.species_name}!</h2>
+          <img src={reward.icon} alt={reward.species_name} />
+          <p>Rarity: {reward.rarity}</p>
+        </div>
       )}
       
     </>
