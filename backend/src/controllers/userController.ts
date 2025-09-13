@@ -89,7 +89,7 @@ class userController {
     try {
       const userId = req.session.userId as number
       if (!userId) return res.status(401).json({ error: "Not authenticated" });
-      const res2 = userService.getUserPokeballs(userId);
+      const res2 = await userService.getUserPokeballs(userId);
       return res.status(200).json(res2);
     } catch (error) {
       if (error instanceof Error) {
