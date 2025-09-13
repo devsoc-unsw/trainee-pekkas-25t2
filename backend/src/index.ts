@@ -5,6 +5,7 @@ import { redisStore } from "./config/redis";
 import userrouter from "./routes/userRoutes";
 import taskRouter from "./routes/taskRoutes";
 import pokemonRouter from "./routes/pokemonRoutes";
+import friendRouter from "./routes/friendRoutes"
 
 declare module "express-session" {
   interface SessionData {
@@ -67,6 +68,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.use("/user", userrouter);
 app.use("/task", taskRouter);
 app.use("/pokemon", pokemonRouter);
+app.use("/friend", friendRouter);
 if (process.env["NODE_ENV"] !== "test") {
   app.listen(SERVER_PORT, () => {
     console.log(`Server running on port http://localhost:${SERVER_PORT}`);

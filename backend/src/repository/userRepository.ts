@@ -71,51 +71,6 @@ class userRepository {
     return user?.activeSlot?.pokemon;
   }
 
-  async getUserFriends(userId: number) {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        friends: {
-          select: {
-            id: true,
-            username: true,
-            icon: true,
-          }
-        }
-      }
-    })
-
-    return user?.friends ?? []
-  }
-
-  async getUserFriendRequests(userId: number) {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        receivedRequests: true
-      }
-    })
-
-    return user?.receivedRequests ?? []
-  }
-
-  async deleteFriendRequest(requestId: number) {
-    await prisma.friendRequest.delete({
-      where: { id: requestId }
-    })
-  }
-
-  async addFriendToUser(userId: number, friendId: number) {
-    await prisma.user.update({
-      where: { id: userId },
-      data: {
-        friends: {
-          connect: { id: friendId }
-        } 
-      }
-    })
-  }
-
 }
 
 export default new userRepository();
