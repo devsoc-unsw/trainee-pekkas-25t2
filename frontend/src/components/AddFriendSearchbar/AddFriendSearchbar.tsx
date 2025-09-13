@@ -14,7 +14,7 @@ function AddFriendSearchbar() {
 
 					<input
 						type="text"
-						placeholder="Search for friends..."
+						placeholder="Search for users..."
 						className={classes.searchInput}
 					/>
 				</div>
