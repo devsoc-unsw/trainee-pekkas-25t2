@@ -27,6 +27,7 @@
     border-radius: 100%;
     background-color: #8e8e8e;
     cursor: pointer;
+    padding: 20px;
 }
 
 .swapButton:hover {
@@ -58,6 +59,25 @@
     padding: 1rem;
     aspect-ratio: 1/1;
     margin: auto;
+    transition: box-shadow 0.3s ease-in
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    width: 100px;
+    height: 100px;
+    border: 5px solid #f8f9fb;
+    border-top-color: #0fa1a8;
+    border-radius: 50%;
+    animation: spin 1s ease-in-out infinite;
 }
 
 .pokemonIcon {
@@ -80,6 +100,7 @@
     border-radius: 100%;
     height: 3.25rem;
     width: 3.25rem;
+    transition: all 0.3s ease-in
 }
 
 /* pokemon name */
@@ -125,6 +146,7 @@
     text-align: center;
     border-radius: 3rem;
     width: 55%;
+    font-family: 'MunroSmall';
 }
 
 .editModeButtonContainer {
@@ -178,7 +200,7 @@
 }
 
 .xpCounter {
-    transition: color 0.3s;
+    transition: all 0.15s ease-in-out;
 }
 
 /* tablet/desktop */
@@ -249,4 +271,48 @@
     }
     
 }
+
+/* On exp change */
+@keyframes popAnim {
+  0%   { transform: scale(1); }
+  55%  { transform: scale(1.3); }
+  85%  { transform: scale(0.6); }
+  100% { transform: scale(1); }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.pokemonLevelContainer.active {
+    box-shadow: 0 0 0.1rem 0.1rem #d6259e;
+    background-color: #d6259e;
+    opacity: 100%;
+}
+
+.xpCounter.active {
+    font-size: 1.5rem;
+    color: #d6259e;
+}
+
+.pokemonProfileContainer.active {
+    box-shadow: 0 0 0.25rem 0.25rem #d6259e;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem
+}
+
+.errorMessage {
+    color: crimson;
+}
+
 

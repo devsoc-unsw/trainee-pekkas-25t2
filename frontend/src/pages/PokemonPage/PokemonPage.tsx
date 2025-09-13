@@ -5,7 +5,6 @@ function PokemonPage() {
   return (
     <>
       <Header />
-      Hello from PokemonPage
       <Navbar />
     </>
   )

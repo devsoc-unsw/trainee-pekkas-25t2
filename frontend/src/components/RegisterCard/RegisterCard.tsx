@@ -5,6 +5,7 @@ import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import styles from "./RegisterCard.module.css"
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import WarnIcon from '../../assets/warning-circle.svg'
 import { API_URL } from '../../utils/constants'
 
 function RegisterCard() {
@@ -52,9 +53,9 @@ function RegisterCard() {
       setIsError(true);
 
       if (axios.isAxiosError(error) && error.response) {
-        setErrorMessage("Error: " + error.response.data.error)
+        setErrorMessage(error.response.data.error)
       } else {
-        setErrorMessage("Unexpected error:" + (error as Error)?.message);
+        setErrorMessage((error as Error)?.message);
       }
     }
     setIsLoading(false)
@@ -94,9 +95,14 @@ function RegisterCard() {
           placeHolder="Confirm Password"
         />
         <div className="center-row">
-          <PrimaryButton type="submit" loading={isLoading}>Sign Up</PrimaryButton>
+          <PrimaryButton type="submit" onClick={() => setIsError(false)}  loading={isLoading}>Sign Up</PrimaryButton>
         </div>
-        {isError && (<div className={`${styles.errorMessage} center-row`}>{errorMessage}</div>)}
+        {isError && (
+          <div className={`${styles.errorMessage} center-row`}>
+            <img src={WarnIcon} alt="warning icon" />
+            {errorMessage}
+          </div>
+        )}
       </form>
       <div className="center-row">
         <p>Already have an account? <a href="" onClick={(e) => onClickHandler(e)}>Log in</a></p>

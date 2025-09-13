@@ -61,6 +61,57 @@ class pokemonService {
             trainerId: userId
         })
     }
+
+    async levelUpPokemon(pokemonId: number) {
+        const pokemon = await pokemonRepository.getPokemonInstanceById(pokemonId)
+
+        if (!pokemon)
+            throw new Error("Invalid pokemon id")
+
+        if (pokemon.exp_lvl < 100)
+            throw new Error("Insufficient EXP needed to evolve")
+
+        await pokemonRepository.addPokemonExp(pokemonId, -100)
+        await pokemonRepository.levelUpPokemon(pokemonId)
+
+        // not sure if this is right but im just picking the first pokemon in the evo chain
+        // feel free to change
+        const species = await pokemonRepository.getPokemonSpeciesById(pokemonId)
+
+        if (!species)
+            throw new Error("Invalid species id")
+
+        if (
+            species.level_to_evolve !== null && pokemon.level >= species.level_to_evolve &&
+            species.evolves_into !== undefined && species.evolves_into[0] &&
+            species.evolves_into?.length > 0
+        ) {
+            await pokemonRepository.evolvePokemon(
+                pokemonId,
+                species.evolves_into[0].pokedex_number
+            )
+        }
+
+        return await pokemonRepository.getPokemonInstanceById(pokemonId)
+    }
+
+    async getUserActivePokemon(userId:number) {
+        const res = pokemonRepository.getUserActivePokemon(userId);
+
+        if (!res)
+            throw new Error("User does not have an active pokemon")
+
+        return res
+    }
+
+    async setActivePokemon(userId: number, pokemonId: number) {
+        const pokemon = await pokemonRepository.getPokemonInstanceById(pokemonId)
+
+        if (!pokemon)
+        throw new Error("Invalid pokemon")
+
+        return await pokemonRepository.setUserActivePokemon(userId, pokemonId)
+    }
 }
 
 export default new pokemonService();

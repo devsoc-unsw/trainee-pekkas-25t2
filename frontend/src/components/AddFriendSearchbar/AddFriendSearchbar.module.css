@@ -29,7 +29,9 @@
 	outline: none;
 	border: none;
 	font-size: 20pt;
+	width: 100%;
+}
 
-	/* expands search bar till end */
-	flex: 1;
+.searchBarForm {
+	width: 100%;
 }

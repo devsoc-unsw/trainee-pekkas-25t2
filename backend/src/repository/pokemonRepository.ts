@@ -34,7 +34,10 @@ class pokemonRepository {
 
     async getPokemonInstancesByUser(userId:number) {
         const res = await prisma.pokemonInstance.findMany({
-            where: {trainerId: userId}
+            where: {trainerId: userId},
+            include: {
+                species: true
+            }
         })
 
         return res;
@@ -81,6 +84,75 @@ class pokemonRepository {
         })
 
         return res;
+    }
+
+    async addPokemonExp(pokemonId: number, exp: number) {
+        await prisma.pokemonInstance.update({
+            where: { id: pokemonId },
+            data: {
+                exp_lvl: {
+                    increment: exp
+                }
+            }
+        })
+    }
+
+    async levelUpPokemon(pokemonId: number) {
+        await prisma.pokemonInstance.update({
+            where: { id: pokemonId },
+            data: {
+                level: {
+                    increment: 1
+                }
+            }
+        })
+    }
+
+    async getPokemonSpeciesById(pokemonId: number) {
+        const res = await prisma.pokemonInstance.findFirst({
+            where: { id: pokemonId },
+            select: {
+                species: {
+                    include: {
+                        evolves_into: true
+                    }
+                }
+            }
+        })
+
+        return res?.species;
+    }
+
+    async getUserActivePokemon(userId: number) {
+        const res = await prisma.activePokemon.findFirst({
+            where: { userId },
+            select: { 
+                pokemon: {
+                    include: {
+                        species: true
+                    }
+                }
+            }
+        })
+
+        return res?.pokemon
+    }
+
+    async setUserActivePokemon(userId: number, pokemonId: number) {
+        const res = await prisma.activePokemon.upsert({
+            where: { userId },
+            update: { pokemonId }, 
+            create: { userId, pokemonId }, 
+            select: { 
+                pokemon: {
+                    include: {
+                        species: true
+                    }
+                }
+            }
+        });
+
+        return res.pokemon
     }
 }
 

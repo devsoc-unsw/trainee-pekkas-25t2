@@ -6,3 +6,7 @@ export type loginUserBody = {
 export type createUserBody =  loginUserBody & {
     email: string
 }
+
+export type usernameBody = {
+    username: string
+}
