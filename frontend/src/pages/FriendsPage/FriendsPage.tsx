@@ -7,16 +7,34 @@ import FriendProfile from "../../components/FriendProfile/FriendProfile"
 import AddFriendSearchbar from "../../components/AddFriendSearchbar/AddFriendSearchbar";
 import axios from 'axios';
 import { API_URL } from '../../utils/constants';
-import type { UserProfileProps } from "../../utils/types";
+import type { FriendPokemonPreviewProps, UserProfileProps } from "../../utils/types";
 import FriendPokemonPreview from "../../components/FriendPokemonPreview/FriendPokemonPreview";
 
 function FriendsPage() {
 	const [showProfile, setShowProfile] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState<UserProfileProps>();
 	const [selectedFriendName, setSelectedFriendName] = useState<string>("");
+	const [friend, setFriend] = useState<FriendPokemonPreviewProps|null>(null);
 
-	const friendNames = ["friend 1", "friend 2", "friend 3", "friend 4", "friend 5"];
-
+	//const friendNames = ["friend 1", "friend 2", "friend 3", "friend 4", "friend 5"];
+	const friends:Array<FriendPokemonPreviewProps> = [
+		{
+			id: 1,
+			username: "Joe",
+			level: 5,
+			icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+			nickname: "Joe Jr.",
+			species: "bulbasaur"
+		},
+		{
+			id: 2,
+			username: "XXXTenacious",
+			level: 33,
+			icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/97.png",
+			nickname: "Drizzy",
+			species: "hypno"
+		}
+	]
 	const handleSearch = async (username:string) => {
 		try {
 			const res = await axios.post(`${API_URL}/user/name`, { username });
@@ -43,15 +61,19 @@ function FriendsPage() {
 					<AddFriendSearchbar onSearch={handleSearch}/>
 					<FriendList
 						openProfile={() => setShowProfile(true)}
-						friendNames={friendNames}
+						friendNames={friends}
 						onSelectFriend={
 							// get lifted state from friendlist (man idk how this works bruh but it just do)
-							(name) => {
-								setSelectedFriendName(name)
+							(friend) => {
+								setFriend(friend)
 							}}
 					/>
 				</div>
-				<FriendPokemonPreview icon={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"} nickname={"Joe Jr."} level={5} username={"joe"} species={"bulbasaur"}/>
+				{friend ? (
+					<FriendPokemonPreview {...friend} />
+					) : (
+					<FriendPokemonPreview username={selectedFriendName} />
+				)}
 			</div>
 			<Navbar />
 		</>

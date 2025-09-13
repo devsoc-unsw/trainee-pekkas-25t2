@@ -1,26 +1,29 @@
-import React from 'react'
 import type { FriendPokemonPreviewProps } from '../../utils/types'
 import classes from "./FriendPokemonPreview.module.css"
-import Card from '../Card/Card'
-function FriendPokemonPreview({ icon, nickname, level, username, species }: FriendPokemonPreviewProps) {
-   if (!icon && !nickname && !level && !username && !species) {
+
+function FriendPokemonPreview({ id, icon, nickname, level, username, species }: FriendPokemonPreviewProps) {
+   if (!id && !icon && !nickname && !level && !username && !species) {
         return  (
-            <div className={classes.textWrapper}>
-                <p className={classes.text}>No Pokemon Displayed!</p>
+            <div className={classes.pokemonCardText}>
+                <div className={classes.wrapper}>
+                    <p className={classes.text}>No pokemon displayed!</p>
+                </div>
             </div>
         )
     }
 
-    if (!icon && !nickname && !level && !species && username) {
+    if (!id && !icon && !nickname && !level && !species && username) {
         return  (
-            <div className={classes.textWrapper}>
-                <p className={classes.text}>{username} has no active pokemon</p>
+            <div className={classes.pokemonCardText}>
+                <div className={classes.wrapper}>
+                    <p className={classes.text}>{username} has no active pokemon</p>
+                </div>
             </div>
         )
     }
 
     return (
-        <Card className={classes.pokemonCard}>
+        <div className={classes.pokemonCard}>
             <div className={classes.wrapper}>
                 <div className={classes.trainer}>
                     <p className={classes.trainertext}>{username}'s {species}</p>
@@ -43,7 +46,7 @@ function FriendPokemonPreview({ icon, nickname, level, username, species }: Frie
                     </div>
                 </div>
             </div>
-        </Card>
+        </div>
         )
 
 }

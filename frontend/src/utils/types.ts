@@ -6,9 +6,10 @@ export type UserProfileProps = {
 }
 
 export type FriendPokemonPreviewProps = {
-    nickname: string|null,
-    level: number|null,
-    icon: string|null,
+    id?: number|null,
+    nickname?: string|null,
+    level?: number|null,
+    icon?: string|null,
     username: string|null,
-    species: string|null
+    species?: string|null
 }
