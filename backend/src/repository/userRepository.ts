@@ -71,6 +71,17 @@ class userRepository {
     return user?.activeSlot?.pokemon;
   }
 
+  async getUserPokeballs(userId:number) {
+    const user = await prisma.user.findFirst({
+      where: { id: userId },
+      select: {
+        activeSlot: {
+          include: {
+            pokemon: true
+          }
+        }
+      }
+  }
 }
 
 export default new userRepository();

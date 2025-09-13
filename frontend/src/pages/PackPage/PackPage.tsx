@@ -75,16 +75,18 @@ function PackPage() {
     <>
       <Header />
       <Navbar />
-      <div className={classes.title}>
-        CLAIM YOUR DAILY PACK
+      <div className={classes.titlewrapper}>
+        <p className={classes.title}>Catch A Pokemon</p>
+        <p className={classes.flavor}>You currently have: pokeballs</p>
+        <p className={classes.flavor}>Earn 1 pokeball per day by completing 5 daily tasks!</p>
       </div>
       {cooldown > 0 ? (
         <div className={classes.cooldown}>
-          <h3>Next pack available in {cooldown} seconds...</h3>
+          <h3>Catch another Pokemon in {cooldown} seconds...</h3>
         </div>
       ) : (
         <button onClick={claimPack} className={classes.claimBtn}>
-          Open Pack
+          Catch Pokemon
         </button>
       )}
       {claimed && reward && (
