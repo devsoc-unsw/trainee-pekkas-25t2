@@ -37,3 +37,12 @@
 .signIn a:hover {
 	text-decoration: underline;
 }
+
+.userProfileButton {
+	color: white;
+	font-size: 17pt;
+	margin-right: 2.4rem;
+	width: 40px;
+
+	cursor: pointer;
+}

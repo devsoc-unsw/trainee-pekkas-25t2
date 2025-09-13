@@ -6,6 +6,7 @@ import { useNavigate } from "react-router"
 import { pokemonData } from "../../pokemonData"
 
 function PackPage() {
+
   const [claimed, setClaimed] = useState(false)
   const [reward, setReward] = useState<any | null>(null)
   const [cooldown, setCooldown] = useState<number>(0)
