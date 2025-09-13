@@ -34,6 +34,11 @@ class userService {
     const res = await userRepository.usePokeball(userId)
     return res;
   }
+
+  async getUserPokeballs(userId:number) {
+    const res = await userRepository.getUserPokeballs(userId);
+    return res;
+  }
 }
 
 export default new userService();
