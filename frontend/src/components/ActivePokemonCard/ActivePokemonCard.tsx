@@ -4,11 +4,12 @@ import SwapIcon from '../../assets/swap-icon.svg'
 import PencilIcon from '../../assets/pencil-icon.svg'
 import PokemonElementTag from '../PokemonElementTag/PokemonElementTag'
 import ProgressBar from '../ProgressBar/ProgressBar'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 import axios from 'axios'
 import { API_URL } from '../../utils/constants'
 import PokemonListModal from '../PokemonListModal/PokemonListModal'
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 type PokemonData = {
   id: number,
@@ -29,34 +30,51 @@ type PokemonData = {
   }
 } | null;
 
-
-// type ActivePokemonCardProps = {
-//   pokemonData: pokemonData
-//   // more props if needed...
-// }
-
 function ActivePokemonCard() {
   const [refresh, setRefresh] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [active, setActive] = useState(false)
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   // pokemon stats
   const [data, setData] = useState<PokemonData | null>(null)
   const [nickname, setNickname] = useState<string>('')
   const [newNickname, setNewNickname] = useState<string>('')
 
-  // refresh when swapping pokemons
+  const isFirstFetch = useRef(true);
+
   useEffect(() => {
+    let timer: number;
+
     const fetchActivePokemon = async () => {
-      setIsLoading(true);
-      const response = await axios.get(`${API_URL}/pokemon/active`, {withCredentials: true});
-      setData(response.data as PokemonData);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+
+        const response = await axios.get(`${API_URL}/pokemon/active`, { withCredentials: true });
+        setData(response.data as PokemonData);
+
+        // Do not trigger animation on mount
+        if (!isFirstFetch.current) {
+          setActive(true);
+          timer = setTimeout(() => setActive(false), 400);
+        } else {
+          isFirstFetch.current = false;
+        }
+      } catch (err) {
+        console.error("Failed to fetch active Pokemon:", err);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchActivePokemon();
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [refresh]);
 
   useEffect(() => {
@@ -68,13 +86,27 @@ function ActivePokemonCard() {
   }, [data]);
 
   const levelUpPokemon = () => {
-    // make req to backend and update data
-    // setData(updated_pokemon_data)
+    if (!data) {
+      setError(true)
+      setErrorMessage("You currently do not have an active pokemon!")
+      return
+    }
 
-    // for animation purposes
-    setActive(true);
-    const timer = setTimeout(() => setActive(false), 400);
-    return () => clearTimeout(timer);
+    // make req to backend and update data
+    setIsLoading(true)
+
+    axios.post(`${API_URL}/pokemon/levelup/${data.id}`, {withCredentials: true})
+      .then(() => {
+        // for animation purposes
+        setIsLoading(false);
+        setRefresh(prev => !prev)
+      })
+      .catch((err: Error) => {
+        setIsLoading(false);
+        setError(true)
+        setErrorMessage(err.message)
+        return
+      })
   }
 
   const cancelChangeNickname = () => {
@@ -104,7 +136,6 @@ function ActivePokemonCard() {
     setRefresh(prev => !prev)
   }
 
-
   if (!data) {
     if (isLoading) {
       return (
@@ -119,7 +150,11 @@ function ActivePokemonCard() {
           <PrimaryButton onClick={() => setShowModal(prev => !prev)}>
             Set an active pokemon
           </PrimaryButton>
-          {showModal && <PokemonListModal onSwap={onSwap}/>}
+          <PokemonListModal 
+            visible={showModal}
+            onSwap={onSwap}
+            onClose={() => setShowModal(false)}
+          />
         </Card>
       )
     }
@@ -128,12 +163,15 @@ function ActivePokemonCard() {
   return (
     <Card className={styles.pokemonCard}>
       <div className={styles.swapButtonContainer}>
-        <button type="button" className={styles.swapButton}>
+        <button 
+          type="button"
+          className={styles.swapButton}
+          onClick={() => setShowModal(true)}
+        >
           <img 
             src={SwapIcon}
             alt="swap icon"
             className={styles.swapButtonIcon}
-            onClick={() => setShowModal(prev => !prev)}
           />
         </button>
       </div>
@@ -183,17 +221,29 @@ function ActivePokemonCard() {
       </div>
       <div className={styles.divider}/>
       <div className={styles.elementsContainer}>
-        {[data.species.primary_type, data.species.secondary_type].map((t) => {
+        {[data.species.primary_type, data.species.secondary_type].map((t, key) => {
           if (t)
-            return <PokemonElementTag element={t}/>
+            return <PokemonElementTag element={t} key={key}/>
         })}
       </div>
       <span>XP: <span className={`${styles.xpCounter} ${active ? styles.active : ''}`}>{data.exp_lvl}/100</span></span>
       <ProgressBar percentFilled={Math.min(data.exp_lvl, 100)}/>
-      <div className='center-row'>
-        {(data.exp_lvl >= 100) && <PrimaryButton onClick={levelUpPokemon}>Level Up</PrimaryButton>}
+      <div className={styles.center}>
+        {(data.exp_lvl >= 100) &&
+            <PrimaryButton 
+              onClick={levelUpPokemon}
+            >
+              Level Up
+            </PrimaryButton>
+        }
+        {error && <div className={styles.errorMessage}>{errorMessage}</div>}
       </div>
-      {showModal && <PokemonListModal onSwap={onSwap}/>}
+      <PokemonListModal 
+        visible={showModal}
+        onSwap={onSwap}
+        onClose={() => setShowModal(false)}
+      />
+      {isLoading && <LoadingScreen/>}
     </Card>
   )
 }

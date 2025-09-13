@@ -27,6 +27,7 @@
     border-radius: 100%;
     background-color: #8e8e8e;
     cursor: pointer;
+    padding: 20px;
 }
 
 .swapButton:hover {
@@ -301,6 +302,17 @@
 
 .pokemonProfileContainer.active {
     box-shadow: 0 0 0.25rem 0.25rem #d6259e;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem
+}
+
+.errorMessage {
+    color: crimson;
 }
 
 

@@ -1,17 +1,20 @@
 .modalContainer {
     position: fixed;
-    background: rgba(0, 0, 0, 0.5);
+    background: #292929d8;
     top: 12rem;
-    left: 12rem;
+    left: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
-    gap: 2rem;
+    gap: 1rem;
+    padding: 1rem;
+    width: 75vw;
+    flex-direction: column;
 }
 
 .pokemonContainer {
-    height: 96px;
+    height: 64px;
     width: auto;
     border: 1px solid white;
     border-radius: 100%;
@@ -21,6 +24,20 @@
 .pokemonContainer:hover {
     background-color: #e7e7e7;
 }
+
+@media screen and (min-width: 800px) {
+   .modalContainer {
+        left: 8rem;
+    } 
+
+    .pokemonContainer {
+        height: 96px;
+        width: auto;
+        border: 1px solid white;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+    }
 
 .spinner {
   width: 30px;
@@ -34,4 +51,33 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.closeButtonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.closeButton {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 100%;
+    filter: invert(1);
+}
+
+.closeButton:hover {
+    background-color: rgb(0, 255, 115);
+}
+
+.heading {
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin-top: 0;
+}
+
+.pokemonListContainer {
+    display: flex;
+    gap: 1rem;
 }
