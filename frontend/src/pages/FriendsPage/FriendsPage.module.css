@@ -1,6 +1,15 @@
 .wrapper {
 	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 70vh;
+	width: 100%;
+}
+
+.left {
+	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	height: 70vh;
+	height: 100%;
+	width: 60vw;
 }

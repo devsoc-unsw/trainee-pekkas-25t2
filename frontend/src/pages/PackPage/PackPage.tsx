@@ -74,7 +74,6 @@ function PackPage() {
   return (
     <>
       <Header />
-      Hello from PackPage
       <Navbar />
       <div className={classes.title}>
         CLAIM YOUR DAILY PACK

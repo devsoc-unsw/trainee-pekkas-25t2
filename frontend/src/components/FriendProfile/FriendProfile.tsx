@@ -4,7 +4,7 @@ import ProfilePokemon from "../ProfilePokemon/ProfilePokemon"
 
 type FriendProfileProps = {
 	exit: () => void;
-	name: string;
+	name: string|undefined;
 }
 
 function FriendProfile({ exit, name }: FriendProfileProps) {

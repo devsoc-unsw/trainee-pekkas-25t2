@@ -7,7 +7,6 @@ function TodoPage() {
     <>
       <Header />
       <ActivePokemonCard/>
-      Hello from TodoPage
       <Navbar />
     </>
   )

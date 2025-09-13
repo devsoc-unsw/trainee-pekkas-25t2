@@ -1,22 +1,22 @@
 import classes from "./FriendList.module.css"
 import FriendBox from "../FriendBox/FriendBox";
+import type { FriendPokemonPreviewProps } from "../../utils/types";
 
 type FriendListProps = {
 	openProfile: () => void;
-	friendNames: Array<string>;
-	onSelectFriend: (name: string) => void;
+	friendNames: Array<FriendPokemonPreviewProps>;
+	onSelectFriend: (friend: FriendPokemonPreviewProps) => void;
 }
 
-function FriendList({ openProfile, friendNames, onSelectFriend }: FriendListProps) {
+function FriendList({ friendNames, onSelectFriend }: FriendListProps) {
 	return (
 		<>
 			<div className={classes.friendList}>
 				<div>
-					{friendNames.map((name) =>
-						<FriendBox name={name} openProfile={() => {
-							openProfile();
+					{friendNames.map((friend) =>
+						<FriendBox key={friend.id} name={friend.username} onClick={() => {
 							// lift state back up to FriendsPage
-							onSelectFriend(name)
+							onSelectFriend(friend)
 						}} />
 					)}
 				</div>
