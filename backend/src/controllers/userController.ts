@@ -84,6 +84,20 @@ class userController {
       return res.status(500).json({error: "Internal Server Error"});
     }
   }
+
+  async getUserPokeballs(req:Request, res:Response) {
+    try {
+      const userId = req.session.userId as number
+      if (!userId) return res.status(401).json({ error: "Not authenticated" });
+      const res2 = userService.getUserPokeballs(userId);
+      return res.status(200).json(res2);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({error: error.message});
+      }
+      return res.status(500).json({error: "Internal Server Error"});
+    }
+  }
 }
 
 export default new userController();
