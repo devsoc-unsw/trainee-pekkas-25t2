@@ -64,8 +64,19 @@ class userController {
   async getUserByName(req: Request<{}, {}, usernameBody, {}>, res:Response) {
     try {
       const { username } = req.body;
-      const res2 = await userService.getUserByUsername(username);
-      return res.status(200).json(res2);
+      const user = await userService.getUserByUsername(username);
+
+      if (user === null) {
+        return res.status(200).json(null);
+      }
+
+      return res.status(200).json({
+          id: user.id,
+          username: user.username,
+          icon: user.icon,
+          featured_pokemon: user.featured_pokemon
+        }
+      );
     } catch (error) {
       if (error instanceof Error) {
         return res.status(400).json({error: error.message});
