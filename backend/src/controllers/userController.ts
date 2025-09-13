@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import userService from "../services/userService";
 import dayjs from "dayjs";
 import bcrypt from "bcrypt";
-import { createUserBody, loginUserBody } from "../types/user";
+import { createUserBody, loginUserBody, usernameBody } from "../types/user";
 
 class userController {
   async createUser(req: Request<{}, {}, createUserBody, {}>, res: Response) {
@@ -58,6 +58,19 @@ class userController {
       });
     } catch (_error) {
       return res.status(500).json({ error: "Error logging in" });
+    }
+  }
+
+  async getUserByName(req: Request<{}, {}, usernameBody, {}>, res:Response) {
+    try {
+      const { username } = req.body;
+      const res2 = await userService.getUserByUsername(username);
+      return res.status(200).json(res2);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({error: error.message});
+      }
+      return res.status(500).json({error: "Internal Server Error"});
     }
   }
 }
