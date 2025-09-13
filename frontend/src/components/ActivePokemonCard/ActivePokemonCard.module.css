@@ -27,6 +27,7 @@
     border-radius: 100%;
     background-color: #8e8e8e;
     cursor: pointer;
+    padding: 20px;
 }
 
 .swapButton:hover {
@@ -59,6 +60,24 @@
     aspect-ratio: 1/1;
     margin: auto;
     transition: box-shadow 0.3s ease-in
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    width: 100px;
+    height: 100px;
+    border: 5px solid #f8f9fb;
+    border-top-color: #0fa1a8;
+    border-radius: 50%;
+    animation: spin 1s ease-in-out infinite;
 }
 
 .pokemonIcon {
@@ -283,6 +302,17 @@
 
 .pokemonProfileContainer.active {
     box-shadow: 0 0 0.25rem 0.25rem #d6259e;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem
+}
+
+.errorMessage {
+    color: crimson;
 }
 
 
