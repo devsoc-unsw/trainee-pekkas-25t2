@@ -55,11 +55,13 @@ class pokemonService {
             level = Math.floor(Math.random() * (pokemonCaught.level_to_evolve - 5)) + 5;
         }
 
-        return await pokemonRepository.createPokemonInstance({
+        await pokemonRepository.createPokemonInstance({
             pokedexNum: pokemonCaught.pokedex_number,
             level: level,
             trainerId: userId
         })
+
+        return pokemonCaught
     }
 
     async levelUpPokemon(pokemonId: number) {

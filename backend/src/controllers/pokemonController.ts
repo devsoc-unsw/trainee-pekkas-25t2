@@ -64,14 +64,15 @@ class pokemonController {
 
     async catchPokemon(req:Request, res:Response) {
         const userId = req.session.userId as number
+        if (!userId) return res.status(401).json({ error: "Not authenticated" });
         try {
             const userData = await userService.getUserById(userId);
             if (userData === null || userData === undefined) {
-                return res.status(400).json({error: "User not found!"});
+                return res.status(401).json({error: "User not found!"});
             }
 
-            if (userData.pokeballs < 0) {
-                return res.status(400).json({error: "Not enough pokeballs!"});
+            if (userData.pokeballs <= 0) {
+                return res.status(401).json({error: "Not enough pokeballs!"});
             }
 
             //should return pokemon caught

@@ -2,21 +2,23 @@ import Header from "../../components/Header/Header"
 import Navbar from "../../components/Navbar/Navbar"
 import classes from "./PackPage.module.css"
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router"
+//import { useNavigate } from "react-router"
 import { pokemonData } from "../../pokemonData"
-
+import axios from 'axios';
+import { API_URL } from "../../utils/constants";
 function PackPage() {
   const [claimed, setClaimed] = useState(false)
   const [reward, setReward] = useState<any | null>(null)
   const [cooldown, setCooldown] = useState<number>(0)
 
-  const rarityWeights = {
-    common: 60,
-    uncommon: 25,
-    rare: 10,
-    starter: 4,
-    legendary: 1
-  }
+  
+  // const rarityWeights = {
+  //   common: 60,
+  //   uncommon: 25,
+  //   rare: 10,
+  //   starter: 4,
+  //   legendary: 1
+  // }
   
   // Randomly selects a rarity based on the above percentages
   const chooseRarity = () => {
@@ -59,6 +61,24 @@ function PackPage() {
     setCooldown(10)
   }
 
+  const catchPokemon = async () => {
+    try {
+      const res = await axios.post(`${API_URL}/pokemon/catch`, {}, { withCredentials: true });
+      if (!res.data) {
+        alert(res.data.message);
+      }
+      console.log(res.data);
+      setReward(res.data)
+      setClaimed(true)
+      setCooldown(10)
+    } catch (err:any) {
+      if (err.response && err.response.status === 401) {
+        alert(err.message);
+      } else {
+        console.error(err);
+      }
+    }
+  }
   // Starts a timer after claiming a pack
   useEffect(() => {
     if (cooldown <= 0) {
@@ -85,7 +105,7 @@ function PackPage() {
           <h3>Catch another Pokemon in {cooldown} seconds...</h3>
         </div>
       ) : (
-        <button onClick={claimPack} className={classes.claimBtn}>
+        <button onClick={catchPokemon} className={classes.claimBtn}>
           Catch Pokemon
         </button>
       )}
@@ -96,7 +116,6 @@ function PackPage() {
           <p>Rarity: {reward.rarity}</p>
         </div>
       )}
-      
     </>
   )
 }
