@@ -65,7 +65,6 @@ function PackPage() {
     const fetchPokeballs = async () => {
       try {
         const res = await axios.get(`${API_URL}/user/pokeballs`, { withCredentials: true });
-        console.log(res.data);
         setPokeballs(res.data.pokeballs);
       } catch (err) {
         console.error("Failed to fetch pokeballs:", err);
@@ -81,7 +80,6 @@ function PackPage() {
       if (!res.data) {
         alert(res.data.message);
       }
-      console.log(res.data);
       setReward(res.data)
       setClaimed(true)
       setCooldown(10)

@@ -1,0 +1,9 @@
+.todoWrapper {
+    height: 70vh;
+	width: 100%;
+}
+
+.leftRightWrapper {
+    height: 100%;
+    display: flex;
+}
