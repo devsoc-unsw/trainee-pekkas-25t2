@@ -20,7 +20,8 @@ export type Pokemon = {
 	"level": number|null,
 	"exp_lvl": number|null,
 	"nickname": string|null,
-	"speciesId": number|null
+	"speciesId": number|null,
+    "icon":string|null
 }
 
 export type PokemonSpecies = {
@@ -34,3 +35,27 @@ export type PokemonSpecies = {
 	"base_pokemon": boolean|null,
 	"rarity": string|null
 }
+
+export type PokemonIconProp = {
+    "icon": string|null,
+    onClick: () => void;
+}
+
+export type PokemonData = {
+  id: number,
+  trainerId: number,
+  level: number,
+  exp_lvl: number,
+  nickname: string | null,
+  species: {
+    pokedex_number: number,
+    species_name: string,
+    primary_type: string,
+    secondary_type: string | null,
+    level_to_evolve: number | null,
+    evolves_from_id: number | null,
+    icon: string,
+    base_pokemon: boolean,
+    rarity: string
+  }
+} | null;
