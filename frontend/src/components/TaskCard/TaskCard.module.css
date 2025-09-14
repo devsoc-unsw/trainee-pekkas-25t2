@@ -1,0 +1,57 @@
+/* One place to control the task row size */
+.row {
+  --task-size: 72px;            /* tweak this to your taste */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0;               /* spacing between rows */
+}
+
+/* Left square: exactly width == height, never shrinks */
+.checkbox {
+  width: var(--task-size);
+  height: var(--task-size);
+  flex: 0 0 var(--task-size);   /* prevent flex from squeezing it */
+  border-radius: 12px;          /* same rounding as pill */
+  border: 2px solid #d1d5db;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+.checkboxCompleted {
+  background: #22c55e;
+  border-color: #16a34a;
+}
+
+/* Task pill: same height as the square, NOT a capsule */
+.inputWrap {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  min-height: var(--task-size); /* matches the square */
+  border: 2px solid #111827;
+  border-radius: 12px;
+  background: #ffffff;
+}
+.inputWrapCompleted { background: #cdeecd; }
+
+.input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0 48px 0 16px;       /* room for trash icon */
+  font-size: 25px;
+}
+
+.trashBtn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.trashIcon { width: 20px; height: 20px; }

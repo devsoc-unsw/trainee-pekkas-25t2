@@ -7,3 +7,7 @@
     height: 100%;
     display: flex;
 }
+.title {
+  font-size: 2.5rem;   /* adjust size */
+  margin-bottom: 1rem; /* optional spacing */
+}
