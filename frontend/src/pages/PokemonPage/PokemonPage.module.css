@@ -1,0 +1,9 @@
+.wrapper {
+    height: 70vh;
+	width: 100%;
+}
+
+.contentWrapper {
+    height: 100%;
+    display: flex;
+}
