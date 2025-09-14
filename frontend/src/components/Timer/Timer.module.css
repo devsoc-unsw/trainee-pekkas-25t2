@@ -1,0 +1,33 @@
+.wrapper {
+    height: 100%;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.instructionText {
+    margin: 0;
+    font-size: 26px;
+}
+
+.time {
+    font-size: 64px;
+}
+
+.toggleButton {
+    height: 2rem;
+    width: 5rem;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+.stop {
+    background-color: #EE1515;
+}
+
+.start {
+    background-color: #43A92E;
+}

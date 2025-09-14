@@ -10,6 +10,7 @@ import axios from 'axios'
 import { API_URL } from '../../utils/constants'
 import PokemonListModal from '../PokemonListModal/PokemonListModal'
 import LoadingScreen from '../LoadingScreen/LoadingScreen'
+import { useNavigate } from "react-router";
 
 type PokemonData = {
   id: number,
@@ -45,6 +46,7 @@ function ActivePokemonCard() {
   const [newNickname, setNewNickname] = useState<string>('')
 
   const isFirstFetch = useRef(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let timer: number;
@@ -147,14 +149,9 @@ function ActivePokemonCard() {
       return (
         <Card className={`${styles.pokemonCard} center-row center-col`}>
           You currently do not have an active pokemon.
-          <PrimaryButton onClick={() => setShowModal(prev => !prev)}>
+          <PrimaryButton onClick={() => navigate("/pokemon")}>
             Set an active pokemon
           </PrimaryButton>
-          <PokemonListModal 
-            visible={showModal}
-            onSwap={onSwap}
-            onClose={() => setShowModal(false)}
-          />
         </Card>
       )
     }
