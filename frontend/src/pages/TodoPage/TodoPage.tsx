@@ -40,9 +40,7 @@ function TodoPage() {
         <ActivePokemonCard/>
       </div>
       <Navbar />
-    </div>
-  )
-      <main style={{ padding: "2rem" }}>
+      <div style={{ padding: "2rem" }}>
         <h1 className={styles.title}>Todo-List</h1>
         {tasks.map((task) => (
           <TaskCard
@@ -53,9 +51,8 @@ function TodoPage() {
             onChange={changeTask}
           />
         ))}
-      </main>
-      <Navbar />
-    </>
+      </div>
+    </div>
   );
 }
 
