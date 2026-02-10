@@ -41,7 +41,7 @@ function TodoPage() {
       </div>
       <Navbar />
       <div style={{ padding: "2rem" }}>
-        <h1 className={styles.title}>Todo-List</h1>
+        <h1 className={styles.title}>Todo List</h1>
         {tasks.map((task) => (
           <TaskCard
             key={task.id}
