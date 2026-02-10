@@ -83,7 +83,7 @@ function PackPage() {
       }
       setReward(res.data)
       setClaimed(true)
-      setCooldown(10)
+      setCooldown(5)
       setCaught((t) => t+1);
     } catch (err:any) {
       if (err.response && err.response.status === 401) {
