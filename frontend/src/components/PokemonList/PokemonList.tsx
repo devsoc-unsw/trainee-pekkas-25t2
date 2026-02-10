@@ -1,3 +1,4 @@
+import React from 'react'
 import classes from './PokemonList.module.css'
 import type { PokemonData } from '../../utils/types'
 import PokemonBox from '../PokemonBox/PokemonBox';

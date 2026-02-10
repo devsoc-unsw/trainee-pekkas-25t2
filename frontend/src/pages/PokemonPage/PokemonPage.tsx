@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import Header from "../../components/Header/Header"
 import Navbar from "../../components/Navbar/Navbar"
+import PokemonBox from "../../components/PokemonBox/PokemonBox";
 import PokemonList from "../../components/PokemonList/PokemonList";
 import type { PokemonData } from "../../utils/types";
 import classes from "./PokemonPage.module.css";
@@ -9,7 +11,7 @@ import { API_URL } from "../../utils/constants";
 import ActivePokemonCard from "../../components/ActivePokemonCard/ActivePokemonCard";
 
 function PokemonPage() {
-  const [_selectedPokemon, setSelectedPokemon] = useState<PokemonData>();
+  const [selectedPokemon, setSelectedPokemon] = useState<PokemonData>();
   const [pokemon, setPokemon] = useState<PokemonData[]>([]);
   
   useEffect(() => {
