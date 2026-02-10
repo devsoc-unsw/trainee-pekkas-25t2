@@ -1,4 +1,3 @@
-import React from 'react'
 import type { PokemonIconProp } from '../../utils/types'
 import classes from "./PokemonBox.module.css"
 function PokemonBox({icon, onClick}:PokemonIconProp) {

@@ -13,7 +13,7 @@ import FriendPokemonPreview from "../../components/FriendPokemonPreview/FriendPo
 function FriendsPage() {
 	const [showProfile, setShowProfile] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState<UserProfileProps>();
-	const [selectedFriendName, setSelectedFriendName] = useState<string>("");
+	const [selectedFriendName, _setSelectedFriendName] = useState<string>("");
 	const [friend, setFriend] = useState<FriendPokemonPreviewProps|null>(null);
 
 	//const friendNames = ["friend 1", "friend 2", "friend 3", "friend 4", "friend 5"];
